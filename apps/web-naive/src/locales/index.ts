@@ -1,20 +1,13 @@
-import type { LocaleSetupOptions, SupportedLanguagesType } from '@vben/locales';
+import type { LocaleSetupOptions, SupportedLanguagesType } from '@vben/locales'
 
-import type { App } from 'vue';
+import type { App } from 'vue'
 
-import {
-  $t,
-  setupI18n as coreSetup,
-  loadLocalesMapFromDir,
-} from '@vben/locales';
-import { preferences } from '@vben/preferences';
+import { $t, setupI18n as coreSetup, loadLocalesMapFromDir } from '@vben/locales'
+import { preferences } from '@vben/preferences'
 
-const modules = import.meta.glob('./langs/**/*.json');
+const modules = import.meta.glob('./langs/**/*.json')
 
-const localesMap = loadLocalesMapFromDir(
-  /\.\/langs\/([^/]+)\/(.*)\.json$/,
-  modules,
-);
+const localesMap = loadLocalesMapFromDir(/\.\/langs\/([^/]+)\/(.*)\.json$/, modules)
 
 /**
  * 加载应用特有的语言包
@@ -22,17 +15,19 @@ const localesMap = loadLocalesMapFromDir(
  * @param lang
  */
 async function loadMessages(lang: SupportedLanguagesType) {
-  const appLocaleMessages = await localesMap[lang]?.();
-  return appLocaleMessages?.default;
+  const appLocaleMessages = await localesMap[lang]?.()
+  return appLocaleMessages?.default
 }
 
 async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
   await coreSetup(app, {
     defaultLocale: preferences.app.locale,
     loadMessages,
-    missingWarn: !import.meta.env.PROD,
+    // missingWarn: !import.meta.env.PROD,
+    // 关闭国际化缺失警告
+    missingWarn: false,
     ...options,
-  });
+  })
 }
 
-export { $t, setupI18n };
+export { $t, setupI18n }

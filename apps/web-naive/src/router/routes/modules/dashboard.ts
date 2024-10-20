@@ -1,7 +1,7 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
-import { BasicLayout } from '#/layouts';
-import { $t } from '#/locales';
+import { BasicLayout } from '#/layouts'
+import { $t } from '#/locales'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -11,12 +11,12 @@ const routes: RouteRecordRaw[] = [
       order: -1,
       title: $t('page.dashboard.title'),
     },
-    name: 'Dashboard',
+    name: 'HOME',
     path: '/',
     children: [
       {
-        name: 'Analytics',
-        path: '/analytics',
+        name: 'Dashboard',
+        path: '/dashboard',
         component: () => import('#/views/dashboard/analytics/index.vue'),
         meta: {
           affixTab: true,
@@ -24,6 +24,18 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.dashboard.analytics'),
         },
       },
+    ],
+  },
+  {
+    component: BasicLayout,
+    meta: {
+      icon: 'lucide:layout-dashboard',
+      order: -1,
+      title: $t('page.dashboard.title'),
+    },
+    name: 'HOME-Workspace',
+    path: '/',
+    children: [
       {
         name: 'Workspace',
         path: '/workspace',
@@ -35,6 +47,6 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes

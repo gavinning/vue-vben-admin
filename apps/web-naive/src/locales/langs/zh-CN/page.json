@@ -7,8 +7,8 @@
     "forgetPassword": "忘记密码"
   },
   "dashboard": {
-    "title": "概览",
-    "analytics": "分析页",
-    "workspace": "工作台"
+    "title": "首页",
+    "analytics": "概览",
+    "workspace": "空间"
   }
 }

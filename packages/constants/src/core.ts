@@ -1,16 +1,16 @@
 /**
  * @zh_CN 登陆页面 url 地址
  */
-export const LOGIN_PATH = '/auth/login';
+export const LOGIN_PATH = '/auth/login'
 
 /**
  * @zh_CN 默认首页地址
  */
-export const DEFAULT_HOME_PATH = '/analytics';
+export const DEFAULT_HOME_PATH = '/dashboard'
 
 export interface LanguageOption {
-  label: string;
-  value: 'en-US' | 'zh-CN';
+  label: string
+  value: 'en-US' | 'zh-CN'
 }
 
 /**
@@ -25,4 +25,4 @@ export const SUPPORT_LANGUAGES: LanguageOption[] = [
     label: 'English',
     value: 'en-US',
   },
-];
+]

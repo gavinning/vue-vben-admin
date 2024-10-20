@@ -1,9 +1,11 @@
 import { defineConfig } from '@vben/vite-config';
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig(async () => {
   return {
     application: {},
     vite: {
+      plugins: [vueDevTools()], // vite插件
       server: {
         proxy: {
           '/api': {

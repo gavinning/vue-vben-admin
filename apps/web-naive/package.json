@@ -25,6 +25,9 @@
   "imports": {
     "#/*": "./src/*"
   },
+  "prettier": {
+    "semi": false
+  },
   "dependencies": {
     "@vben/access": "workspace:*",
     "@vben/common-ui": "workspace:*",
@@ -45,5 +48,8 @@
     "pinia": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "vite-plugin-vue-devtools": "catalog:"
   }
 }

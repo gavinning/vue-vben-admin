@@ -24,6 +24,9 @@
     "url": "https://github.com/anncwb"
   },
   "type": "module",
+  "prettier": {
+    "semi": false
+  },
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
     "build:analyze": "turbo build:analyze",
