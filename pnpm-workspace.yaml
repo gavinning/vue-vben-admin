@@ -1,4 +1,6 @@
 packages:
+  - deep/*
+  - deep/app/*
   - internal/*
   - internal/lint-configs/*
   - packages/*

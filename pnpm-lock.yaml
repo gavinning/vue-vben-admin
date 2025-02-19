@@ -755,6 +755,9 @@ importers:
       pinia:
         specifier: ^2.3.1
         version: 2.3.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
+      sky:
+        specifier: workspace:*
+        version: link:../../deep/app/sky
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.7.3)
@@ -825,6 +828,35 @@ importers:
       vue-router:
         specifier: 'catalog:'
         version: 4.5.0(vue@3.5.13(typescript@5.7.3))
+
+  deep/app/sky:
+    dependencies:
+      '@4a/helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@vben/hooks':
+        specifier: workspace:*
+        version: link:../../../packages/effects/hooks
+      '@vben/preferences':
+        specifier: workspace:*
+        version: link:../../../packages/preferences
+      '@vben/request':
+        specifier: workspace:*
+        version: link:../../../packages/effects/request
+      '@vben/stores':
+        specifier: workspace:*
+        version: link:../../../packages/stores
+      '@vben/types':
+        specifier: workspace:*
+        version: link:../../../packages/types
+      element-plus:
+        specifier: 'catalog:'
+        version: 2.9.4(vue@3.5.13(typescript@5.7.3))
+      mitt:
+        specifier: ^3.0.1
+        version: 3.0.1
+
+  deep/helper: {}
 
   docs:
     dependencies:

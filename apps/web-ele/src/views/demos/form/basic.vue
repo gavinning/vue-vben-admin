@@ -4,9 +4,9 @@ import { h } from 'vue';
 import { Page } from '@vben/common-ui';
 
 import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus';
+import { getAllMenusApi } from 'sky/api';
 
 import { useVbenForm } from '#/adapter/form';
-import { getAllMenusApi } from '#/api';
 
 const [Form, formApi] = useVbenForm({
   commonConfig: {

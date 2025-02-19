@@ -17,6 +17,14 @@
       "path": "apps/web-naive",
     },
     {
+      "name": "sky",
+      "path": "deep/app/sky",
+    },
+    {
+      "name": "@4a/helper",
+      "path": "deep/helper",
+    },
+    {
       "name": "@vben/docs",
       "path": "docs",
     },

@@ -45,7 +45,8 @@
     "element-plus": "catalog:",
     "pinia": "catalog:",
     "vue": "catalog:",
-    "vue-router": "catalog:"
+    "vue-router": "catalog:",
+    "sky": "workspace:*"
   },
   "devDependencies": {
     "unplugin-element-plus": "catalog:"
