@@ -1,0 +1,17 @@
+{
+  "name": "@4a/helper",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "keywords": [],
+  "author": "gavinning <gavinning@qq.com>",
+  "license": "MIT"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "sky",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./api": {
+      "types": "./src/api/index.ts",
+      "default": "./src/api/index.ts"
+    }
+  },
+  "keywords": [],
+  "author": "gavinning <gavinning@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@4a/helper": "workspace:*",
+    "@vben/types": "workspace:*",
+    "@vben/hooks": "workspace:*",
+    "@vben/preferences": "workspace:*",
+    "@vben/request": "workspace:*",
+    "@vben/stores": "workspace:*",
+    "element-plus": "catalog:",
+    "mitt": "^3.0.1"
+  }
+}
