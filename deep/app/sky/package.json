@@ -16,6 +16,9 @@
       "default": "./src/api/index.ts"
     }
   },
+  "prettier": {
+    "semi": false
+  },
   "keywords": [],
   "author": "gavinning <gavinning@qq.com>",
   "license": "MIT",

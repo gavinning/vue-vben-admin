@@ -25,6 +25,7 @@
   },
   "type": "module",
   "scripts": {
+    "sky": "pnpm --filter @vben/sky",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
     "build:analyze": "turbo build:analyze",
     "build:antd": "pnpm run build --filter=@vben/web-antd",
