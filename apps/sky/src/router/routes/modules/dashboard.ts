@@ -1,6 +1,6 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
-import { $t } from '#/locales';
+import { $t } from '#/locales'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -21,9 +21,20 @@ const routes: RouteRecordRaw[] = [
           title: '支付',
         },
       },
+      {
+        name: 'PayEdit',
+        path: '/pay/edit/:id',
+        component: () => import('#/views/dashboard/pay/edit.vue'),
+        meta: {
+          icon: 'carbon:edit',
+          title: '修改支付',
+          hideInMenu: true,
+          hideInTabs: true,
+        },
+      },
     ],
   },
-];
+]
 
 if (import.meta.env.DEV) {
   const analytics = {
@@ -35,7 +46,7 @@ if (import.meta.env.DEV) {
       icon: 'lucide:area-chart',
       title: $t('page.dashboard.analytics'),
     },
-  };
+  }
   const workspace = {
     name: 'Workspace',
     path: '/workspace',
@@ -44,9 +55,9 @@ if (import.meta.env.DEV) {
       icon: 'carbon:workspace',
       title: $t('page.dashboard.workspace'),
     },
-  };
+  }
 
-  routes[0]?.children?.push(analytics, workspace);
+  routes[0]?.children?.push(analytics, workspace)
 }
 
-export default routes;
+export default routes

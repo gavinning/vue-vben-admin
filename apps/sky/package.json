@@ -25,7 +25,12 @@
   "imports": {
     "#/*": "./src/*"
   },
+  "prettier": {
+    "semi": false
+  },
   "dependencies": {
+    "@4a/helper": "workspace:*",
+    "@element-plus/icons-vue": "catalog:",
     "@vben/access": "workspace:*",
     "@vben/common-ui": "workspace:*",
     "@vben/constants": "workspace:*",
@@ -43,12 +48,15 @@
     "@vueuse/core": "catalog:",
     "dayjs": "catalog:",
     "element-plus": "catalog:",
+    "extend": "^3.0.2",
     "pinia": "catalog:",
+    "sky": "workspace:*",
     "vue": "catalog:",
-    "vue-router": "catalog:",
-    "sky": "workspace:*"
+    "vue-router": "catalog:"
   },
   "devDependencies": {
+    "@types/extend": "^3.0.4",
+    "stylus": "^0.64.0",
     "unplugin-element-plus": "catalog:"
   }
 }

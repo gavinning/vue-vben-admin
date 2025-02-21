@@ -11,9 +11,9 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
-    "./api": {
-      "types": "./src/api/index.ts",
-      "default": "./src/api/index.ts"
+    "./core": {
+      "types": "./src/core/index.ts",
+      "default": "./src/core/index.ts"
     }
   },
   "prettier": {

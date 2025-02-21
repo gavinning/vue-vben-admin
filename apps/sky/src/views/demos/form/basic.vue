@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { h } from 'vue';
+import { h } from 'vue'
 
-import { Page } from '@vben/common-ui';
+import { Page } from '@vben/common-ui'
 
-import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus';
-import { getAllMenusApi } from 'sky/api';
+import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus'
 
-import { useVbenForm } from '#/adapter/form';
+import { useVbenForm } from '#/adapter/form'
+import { getAllMenusApi } from '#/api'
 
 const [Form, formApi] = useVbenForm({
   commonConfig: {
@@ -19,7 +19,7 @@ const [Form, formApi] = useVbenForm({
   // 大屏一行显示3个，中屏一行显示2个，小屏一行显示1个
   wrapperClass: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
   handleSubmit: (values) => {
-    ElMessage.success(`表单数据：${JSON.stringify(values)}`);
+    ElMessage.success(`表单数据：${JSON.stringify(values)}`)
   },
   schema: [
     {
@@ -32,7 +32,7 @@ const [Form, formApi] = useVbenForm({
           return data.map((item: any) => ({
             label: item.name,
             value: item.path,
-          }));
+          }))
         },
         // 菜单接口
         api: getAllMenusApi,
@@ -111,9 +111,9 @@ const [Form, formApi] = useVbenForm({
           default: () => {
             return ['A', 'B', 'C', 'D'].map((v) =>
               h(ElCheckbox, { label: v, value: v }),
-            );
+            )
           },
-        };
+        }
       },
     },
     {
@@ -148,7 +148,7 @@ const [Form, formApi] = useVbenForm({
       },
     },
   ],
-});
+})
 function setFormValues() {
   formApi.setValues({
     string: 'string',
@@ -160,7 +160,7 @@ function setFormValues() {
     checkbox1: ['A', 'B'],
     date: new Date(),
     select: 'B',
-  });
+  })
 }
 </script>
 <template>

@@ -1,4 +1,4 @@
-import { defineOverridesPreferences } from '@vben/preferences';
+import { defineOverridesPreferences } from '@vben/preferences'
 
 /**
  * @description 项目配置文件
@@ -14,4 +14,11 @@ export const overridesPreferences = defineOverridesPreferences({
     enable: true,
     source: '/logo.svg',
   },
-});
+  copyright: {
+    companyName: '连城数据',
+    enable: true,
+    companySiteLink: `https://${location.hostname}`,
+    date: '2025',
+    settingShow: true,
+  },
+})
