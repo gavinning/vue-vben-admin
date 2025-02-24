@@ -2,6 +2,7 @@ import { ElNotification as Notice } from 'element-plus'
 import { defineStore } from 'pinia'
 
 import { addPayItem, getPayList, updatePayItem } from '#/api'
+import { ok } from '#/helper/assert'
 
 export const usePayStore = defineStore('pay', {
   state: () => ({
@@ -13,6 +14,10 @@ export const usePayStore = defineStore('pay', {
     },
 
     async addPayItem(item: App.Pay.Row) {
+      ok(item.appId, 'AppId 不能为空')
+      ok(item.type, '支付类型 不能为空')
+      // 代理可管理的支付固定位2
+      item.channel = 2
       return addPayItem(item)
         .then(() => {
           Notice.success({
@@ -21,15 +26,15 @@ export const usePayStore = defineStore('pay', {
           })
         })
         .catch((error) => {
-          Notice.error({
-            title: '执行失败',
-            message: `${item.name} 添加失败：${error.message}`,
-          })
-          throw error
+          throw new Error(`${item.name} 添加失败：${error.message}`)
         })
     },
 
     async updatePayItem(item: App.Pay.Row) {
+      ok(item.appId, 'AppId 不能为空')
+      ok(item.type, '支付类型 不能为空')
+      // 代理可管理的支付固定位2
+      item.channel = 2
       return updatePayItem(item)
         .then(() => {
           Notice.success({
@@ -38,11 +43,7 @@ export const usePayStore = defineStore('pay', {
           })
         })
         .catch((error) => {
-          Notice.error({
-            title: '执行失败',
-            message: `${item.name} 更新失败：${error.message}`,
-          })
-          throw error
+          throw new Error(`${item.name} 更新失败：${error.message}`)
         })
     },
   },

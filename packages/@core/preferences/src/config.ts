@@ -31,9 +31,9 @@ const defaultPreferences: Preferences = {
     styleType: 'normal',
   },
   copyright: {
-    companyName: 'Vben',
-    companySiteLink: 'https://www.vben.pro',
-    date: '2024',
+    companyName: 'SKII',
+    companySiteLink: 'https://www.skii.top',
+    date: '2025',
     enable: true,
     icp: '',
     icpLink: '',

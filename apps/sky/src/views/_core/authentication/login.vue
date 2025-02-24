@@ -29,21 +29,27 @@ const MOCK_USER_OPTIONS: BasicOption[] = [
 ]
 
 const formSchema = computed((): VbenFormSchema[] => {
+  const arr = import.meta.env.PROD
+    ? []
+    : [
+        {
+          component: 'VbenSelect',
+          componentProps: {
+            options: MOCK_USER_OPTIONS,
+            placeholder: $t('authentication.selectAccount'),
+          },
+          fieldName: 'selectAccount',
+          label: $t('authentication.selectAccount'),
+          rules: z
+            .string()
+            .min(1, { message: $t('authentication.selectAccount') })
+            .optional()
+            .default('vben'),
+        },
+      ]
+
   return [
-    {
-      component: 'VbenSelect',
-      componentProps: {
-        options: MOCK_USER_OPTIONS,
-        placeholder: $t('authentication.selectAccount'),
-      },
-      fieldName: 'selectAccount',
-      label: $t('authentication.selectAccount'),
-      rules: z
-        .string()
-        .min(1, { message: $t('authentication.selectAccount') })
-        .optional()
-        .default('vben'),
-    },
+    ...arr,
     {
       component: 'VbenInput',
       componentProps: {

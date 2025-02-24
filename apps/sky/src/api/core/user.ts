@@ -1,20 +1,16 @@
-import type { UserInfo } from '@vben/types'
+// import type { UserInfo } from '@vben/types'
 
-import { requestClient } from '../request'
+import { requestClient as req } from '../request'
 
 /**
  * 获取用户信息
  */
 export async function getUserInfoApi() {
-  return getUserInfoTesting()
-  return requestClient.get<UserInfo>('/user/info')
-}
-
-function getUserInfoTesting() {
+  const data = await req.get('/users/me')
   return {
-    id: 0,
-    realName: 'Vben',
-    roles: ['super'],
-    username: 'vben',
+    realName: data.name || data.first_name,
+    email: data.email,
+    username: data.email,
+    roles: [data.role],
   }
 }

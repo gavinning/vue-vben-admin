@@ -9,6 +9,9 @@ export const overridesPreferences = defineOverridesPreferences({
   // overrides
   app: {
     name: import.meta.env.VITE_APP_TITLE,
+    // 开启或关闭偏好设置
+    enablePreferences: false,
+    defaultAvatar: '/logo.png',
   },
   logo: {
     enable: true,
@@ -20,5 +23,11 @@ export const overridesPreferences = defineOverridesPreferences({
     companySiteLink: `https://${location.hostname}`,
     date: '2025',
     settingShow: true,
+  },
+  widget: {
+    globalSearch: false,
+    languageToggle: false,
+    lockScreen: false,
+    notification: false,
   },
 })
