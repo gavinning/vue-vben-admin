@@ -20,4 +20,10 @@ export namespace AppEvent {
 
     Editing = 'Pay.Editing',
   }
+
+  /** 订单事件 */
+  export enum Trade {
+    Refund = 'Trade.Refund',
+    Refunding = 'Trade.Refunding',
+  }
 }

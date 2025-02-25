@@ -3,6 +3,18 @@ export {}
 // extend
 declare global {}
 
+// 基础常用扩展
+declare global {
+  export type Item = Record<string, any>
+  export type AnyFunction<T = any> = (...args: any[]) => T
+  export type AnyVoidFunction = AnyFunction<void>
+  export type AnyAsyncFunction<T = any> = (...args: any[]) => Promise<T>
+  export type AnyConstructor<T = any> = new (...args: any[]) => T
+  export type ClassConstructor<T> = {
+    new (...args: any[]): T
+  }
+}
+
 declare global {
   export namespace App {
     export namespace Pay {
@@ -21,6 +33,13 @@ declare global {
         channel?: number
         date_created?: string
         date_updated?: string
+      }
+    }
+
+    export namespace Trade {
+      export interface Row {
+        id?: ID
+        tradeid: string
       }
     }
   }

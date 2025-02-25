@@ -16,5 +16,11 @@
   },
   "keywords": [],
   "author": "gavinning <gavinning@qq.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "extend": "catalog:"
+  },
+  "devDependencies": {
+    "@types/extend": "catalog:"
+  }
 }

@@ -1,4 +1,5 @@
 export * from './auth'
 export * from './menu'
 export * from './pay'
+export * from './trade'
 export * from './user'

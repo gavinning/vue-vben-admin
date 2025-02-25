@@ -32,6 +32,16 @@ const routes: RouteRecordRaw[] = [
           hideInTabs: true,
         },
       },
+
+      {
+        name: 'Trade',
+        path: '/trades',
+        component: () => import('#/views/dashboard/trade/index.vue'),
+        meta: {
+          icon: 'carbon:list',
+          title: '订单',
+        },
+      },
     ],
   },
 ]

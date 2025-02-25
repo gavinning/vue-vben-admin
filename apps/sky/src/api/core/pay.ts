@@ -1,14 +1,17 @@
+import type { QueryMany } from '@directus/sdk'
+
 import { removeKey } from '@4a/helper'
 
+import { defaultParams } from '../directus'
 import { requestClient as req } from '../request'
 
 /**
  * 获取支付列表
- * TODO params参数待实现
  * @param params 参数列表
  * @returns 支付列表
  */
-export async function getPayList(params: any = {}) {
+export async function getPayList(params: QueryMany<any> = {}) {
+  params = defaultParams(params)
   return req.get<App.Pay.Row[]>('/items/pays', { params })
 }
 

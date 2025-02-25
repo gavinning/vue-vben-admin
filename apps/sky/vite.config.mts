@@ -1,6 +1,6 @@
-import { defineConfig } from '@vben/vite-config';
-
-import ElementPlus from 'unplugin-element-plus/vite';
+import { defineConfig } from '@vben/vite-config'
+import AutoImport from 'unplugin-auto-import/vite'
+import ElementPlus from 'unplugin-element-plus/vite'
 
 export default defineConfig(async () => {
   return {
@@ -9,6 +9,26 @@ export default defineConfig(async () => {
       plugins: [
         ElementPlus({
           format: 'esm',
+        }),
+        AutoImport({
+          include: [
+            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+            /\.vue$/,
+            /\.vue\?vue/, // .vue
+            /\.md$/, // .md
+          ],
+          dts: true,
+          imports: [
+            'vue',
+            'vue-router',
+            {
+              pinia: ['defineStore', 'createPinia'],
+              '@/config': [],
+              '@/store': [],
+              '@/helper': [],
+              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey'],
+            },
+          ],
         }),
       ],
       server: {
@@ -23,5 +43,5 @@ export default defineConfig(async () => {
         },
       },
     },
-  };
-});
+  }
+})

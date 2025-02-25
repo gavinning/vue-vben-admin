@@ -48,15 +48,18 @@
     "@vueuse/core": "catalog:",
     "dayjs": "catalog:",
     "element-plus": "catalog:",
-    "extend": "^3.0.2",
+    "extend": "catalog:",
     "pinia": "catalog:",
     "sky": "workspace:*",
     "vue": "catalog:",
     "vue-router": "catalog:"
   },
   "devDependencies": {
-    "@types/extend": "^3.0.4",
-    "stylus": "^0.64.0",
+    "@directus/sdk": "catalog:",
+    "@types/extend": "catalog:",
+    "stylus": "catalog:",
+    "vxe-table": "catalog:",
+    "unplugin-auto-import": "catalog:",
     "unplugin-element-plus": "catalog:"
   }
 }
