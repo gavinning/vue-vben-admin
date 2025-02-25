@@ -1,0 +1,13 @@
+src/
+assets/
+public/
+.cache/
+*.sh
+*.zip
+
+/index.html
+/*.md
+/*.ts
+/*.d.ts
+/*.json
+/pnpm-lock.yaml
