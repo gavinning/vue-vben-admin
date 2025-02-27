@@ -21,17 +21,6 @@ const routes: RouteRecordRaw[] = [
           title: '支付',
         },
       },
-      {
-        name: 'PayEdit',
-        path: '/pay/edit/:id',
-        component: () => import('#/views/dashboard/pay/edit.vue'),
-        meta: {
-          icon: 'carbon:edit',
-          title: '修改支付',
-          hideInMenu: true,
-          hideInTabs: true,
-        },
-      },
 
       {
         name: 'Trade',
@@ -47,6 +36,16 @@ const routes: RouteRecordRaw[] = [
 ]
 
 if (import.meta.env.DEV) {
+  const demoPage = {
+    name: 'DemoPage',
+    path: '/demoPage',
+    component: () => import('#/views/dashboard/demo/demo.vue'),
+    meta: {
+      icon: 'carbon:demo',
+      title: '测试页面',
+    },
+  }
+
   const analytics = {
     name: 'Analytics',
     path: '/analytics',
@@ -67,7 +66,7 @@ if (import.meta.env.DEV) {
     },
   }
 
-  routes[0]?.children?.push(analytics, workspace)
+  routes[0]?.children?.push(demoPage, analytics, workspace)
 }
 
 export default routes

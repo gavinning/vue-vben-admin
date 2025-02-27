@@ -4,12 +4,12 @@ import type { GridOptions } from '#/components/Table'
 import { ElButton, ElTag } from 'element-plus'
 import { AppEvent, emitter } from 'sky/core'
 
-import { getDirectusListBridge } from '#/api/directus'
+import { getListBridge } from '#/api/directus'
 import { defineGird } from '#/components/Table'
 
 const columns = [
   { title: '序号', type: 'seq', width: 50 },
-  { field: 'tradeid', title: '订单号', width: 260 },
+  { field: 'tradeid', title: '订单号', width: 240 },
   { field: 'app.name', title: '产品' },
   { field: 'amount', title: '金额' },
   // { field: 'from', title: '渠道' },
@@ -21,7 +21,7 @@ const columns = [
     fixed: 'right',
     slots: { default: 'action' },
     title: '退款',
-    width: 120,
+    width: 80,
   },
 ]
 
@@ -29,7 +29,7 @@ const options: GridOptions = {
   columns,
   proxyConfig: {
     ajax: {
-      query: getDirectusListBridge,
+      query: getListBridge('trades'),
     },
   },
 }

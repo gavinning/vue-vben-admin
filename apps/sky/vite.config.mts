@@ -23,10 +23,15 @@ export default defineConfig(async () => {
             'vue-router',
             {
               pinia: ['defineStore', 'createPinia'],
+              'element-plus': [
+                ['ElMessage', 'Message'],
+                ['ElMessageBox', 'Popover'],
+                ['ElNotification', 'Notice'],
+              ],
               '@/config': [],
               '@/store': [],
               '@/helper': [],
-              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey'],
+              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy'],
             },
           ],
         }),

@@ -7,10 +7,14 @@
 export {}
 declare global {
   const EffectScope: (typeof import('vue'))['EffectScope']
+  const Message: (typeof import('element-plus'))['ElMessage']
+  const Notice: (typeof import('element-plus'))['ElNotification']
+  const Popover: (typeof import('element-plus'))['ElMessageBox']
   const computed: (typeof import('vue'))['computed']
   const createApp: (typeof import('vue'))['createApp']
   const createPinia: (typeof import('pinia'))['createPinia']
   const customRef: (typeof import('vue'))['customRef']
+  const deepCopy: (typeof import('@4a/helper'))['deepCopy']
   const defineAsyncComponent: (typeof import('vue'))['defineAsyncComponent']
   const defineComponent: (typeof import('vue'))['defineComponent']
   const defineStore: (typeof import('pinia'))['defineStore']

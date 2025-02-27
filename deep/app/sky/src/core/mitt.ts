@@ -11,14 +11,16 @@ export namespace AppEvent {
   /** 支付事件 */
   export enum Pay {
     Add = 'Pay.Add',
-    // 更新指令
-    Adding = 'Pay.Adding',
-
     // 关闭操作面板
     Close = 'Pay.Close',
+
     Edit = 'Pay.Edit',
 
-    Editing = 'Pay.Editing',
+    // 刷新当前页
+    RefreshCurrentPage = 'Pay.RefreshCurrentPage',
+
+    // 刷新并跳转到第一页
+    RefreshFirstPage = 'Pay.RefreshFirstPage',
   }
 
   /** 订单事件 */
