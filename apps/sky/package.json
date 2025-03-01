@@ -41,6 +41,7 @@
     "@vueuse/core": "catalog:",
     "dayjs": "catalog:",
     "element-plus": "catalog:",
+    "es-toolkit": "^1.32.0",
     "extend": "catalog:",
     "pinia": "catalog:",
     "sky": "workspace:*",

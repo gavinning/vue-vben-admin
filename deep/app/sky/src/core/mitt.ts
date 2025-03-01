@@ -28,4 +28,8 @@ export namespace AppEvent {
     Refund = 'Trade.Refund',
     Refunding = 'Trade.Refunding',
   }
+
+  export enum Link {
+    Submit = 'Link.Submit',
+  }
 }

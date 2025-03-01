@@ -1,10 +1,10 @@
 import type { VxeGridPropTypes } from 'vxe-table'
 
-import { item } from './core'
+import { directusItem } from './core'
 
 export function getListBridge(collection: string) {
   return async ({ page }: VxeGridPropTypes.ProxyAjaxQueryParams) => {
-    const body = await item(collection).get({
+    const body = await directusItem(collection).get({
       page: page.currentPage,
       limit: page.pageSize,
     })

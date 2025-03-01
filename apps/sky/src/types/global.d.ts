@@ -42,5 +42,25 @@ declare global {
         tradeid: string
       }
     }
+
+    export namespace Link {
+      export interface Row {
+        id?: ID
+        app: any
+        title: string
+        product?: any
+        amount: string
+        from?: string
+        source?: string
+        config?: Item
+        button?: string
+        type?: string
+        resource?: string
+        other_link?: string
+        btn_placeholder?: string
+        date_created?: string
+        date_updated?: string
+      }
+    }
   }
 }

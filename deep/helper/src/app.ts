@@ -59,3 +59,15 @@ export function deepCopy<T>(src: any, target: T): T {
   emptyObject(src)
   return merge(true, src, target)
 }
+
+export function removeNull(target: any) {
+  if (!target) return target
+  const obj = merge(true, {}, target)
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] === null) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete obj[key]
+    }
+  })
+  return obj
+}

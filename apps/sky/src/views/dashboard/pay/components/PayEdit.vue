@@ -52,14 +52,14 @@ emitter.on(AppEvent.Pay.Edit, (data: any) => {
 })
 
 function add() {
-  payStore.addPayItem(form).then(() => {
+  payStore.add(form).then(() => {
     showDrawer.value = false
     emitter.emit(AppEvent.Pay.RefreshFirstPage)
   })
 }
 
 function edit() {
-  payStore.updatePayItem(form).then(() => {
+  payStore.update(form).then(() => {
     showDrawer.value = false
     emitter.emit(AppEvent.Pay.RefreshCurrentPage)
   })

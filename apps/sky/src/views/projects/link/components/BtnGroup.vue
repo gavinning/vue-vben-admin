@@ -7,6 +7,8 @@ import { Plus } from '@element-plus/icons-vue'
 import { ElButton, ElButtonGroup, ElTooltip, ElUpload } from 'element-plus'
 
 const fileList = defineModel<UploadUserFile[]>()
+
+const submit = () => emitter.emit(AppEvent.Link.Submit)
 </script>
 <template>
   <ElButtonGroup class="ml-4">
@@ -33,9 +35,9 @@ const fileList = defineModel<UploadUserFile[]>()
       class="box-item"
       effect="dark"
       placement="top"
-      content="保存图片"
+      content="保存链接"
     >
-      <ElButton type="primary" :icon="SaveIcon" />
+      <ElButton type="primary" :icon="SaveIcon" @click="submit" />
     </ElTooltip>
     <ElTooltip
       class="box-item"

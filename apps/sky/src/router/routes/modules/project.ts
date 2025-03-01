@@ -11,12 +11,23 @@ const routes: RouteRecordRaw[] = [
     path: '/projects',
     children: [
       {
-        name: 'PM',
-        path: '/pm',
-        component: () => import('#/views/projects/pm/index.vue'),
+        name: 'Links',
+        path: '/projects/links',
+        component: () => import('#/views/projects/link/index.vue'),
         meta: {
           icon: 'line-md:link',
-          title: '链接管理',
+          title: '链接',
+        },
+      },
+      {
+        name: 'LinkEdit',
+        path: '/projects/links/:id',
+        component: () => import('#/views/projects/link/edit.vue'),
+        meta: {
+          icon: 'line-md:edit',
+          title: 'Edit',
+          hideInTab: true,
+          hideInMenu: true,
         },
       },
     ],

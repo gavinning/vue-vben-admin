@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import type { UploadUserFile } from 'element-plus'
 
-import { ref } from 'vue'
-
 import { ElButton, ElText } from 'element-plus'
 
 import BtnGroup from './BtnGroup.vue'
@@ -27,15 +25,15 @@ const fileList = ref<UploadUserFile[]>([])
     <Simulator
       class="mt-4"
       v-model="fileList"
-      :safe-bottom="model.safeBottom"
-      :safe-bottom-large="model.otherLink ? true : false"
+      :safe-bottom="model.safe_bottom"
+      :safe-bottom-large="model.other_link ? true : false"
     />
     <div class="ap-fixed">
       <ElButton type="primary" size="large" block>
-        {{ model.button || model.btnPlaceholder }}
+        {{ model.button || model.btn_placeholder }}
       </ElButton>
-      <ElButton v-if="model.otherLink" type="primary" size="large" block>
-        {{ model.linkButton || model.btnPlaceholder }}
+      <ElButton v-if="model.other_link" type="primary" size="large" block>
+        {{ model.other_link_button || model.btn_placeholder }}
       </ElButton>
     </div>
   </div>

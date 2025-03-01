@@ -1,1 +1,1 @@
-export * from './core/mitt';
+export * from './core'

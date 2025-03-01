@@ -17,7 +17,10 @@ const files = defineModel<UploadUserFile[]>()
         <img :src="item.url" :alt="item.name" />
       </li>
     </ul>
-    <div v-if="safeBottom" :class="{ safeBottom, safeBottomLarge }"></div>
+    <div
+      v-if="safeBottom"
+      :class="{ safe_bottom: safeBottom, safe_bottom_large: safeBottomLarge }"
+    ></div>
   </ElScrollbar>
 </template>
 <style lang="stylus" scoped>
@@ -28,9 +31,9 @@ const files = defineModel<UploadUserFile[]>()
   background-color var(--el-fill-color-blank)
   border-radius 12px
 
-.safeBottom
+.safe_bottom
   padding-bottom 90px
 
-  &.safeBottomLarge
+  &.safe_bottom_large
     padding-bottom 150px
 </style>

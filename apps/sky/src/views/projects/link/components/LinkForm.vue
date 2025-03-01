@@ -41,7 +41,7 @@ const modelValue = defineModel<any>()
     </ElRow>
 
     <ElFormItem label-position="top" label="标题">
-      <ElInput v-model="modelValue.desc" />
+      <ElInput v-model="modelValue.title" />
       <ElText type="info" size="small">发货时显示标题</ElText>
     </ElFormItem>
 
@@ -59,7 +59,7 @@ const modelValue = defineModel<any>()
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="推广渠道">
           <ElInput
-            v-model="modelValue.appSecret"
+            v-model="modelValue.source"
             placeholder="渠道统计，如抖音、快手"
           />
           <ElText type="info" size="small">统计不同渠道的订单数据</ElText>
@@ -73,7 +73,7 @@ const modelValue = defineModel<any>()
         <ElFormItem label-position="top" label="按钮文案">
           <ElInput
             v-model="modelValue.button"
-            :placeholder="modelValue.btnPlaceholder"
+            :placeholder="modelValue.btn_placeholder"
           />
           <ElText type="info" size="small">主按钮文案</ElText>
         </ElFormItem>
@@ -86,7 +86,7 @@ const modelValue = defineModel<any>()
           style="display: block"
         >
           <ElSwitch
-            v-model="modelValue.safeBottom"
+            v-model="modelValue.safe_bottom"
             size="large"
             style="
 
@@ -103,7 +103,7 @@ const modelValue = defineModel<any>()
       <ElCol :span="12">
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="关联链接">
-          <ElInput v-model="modelValue.otherLink" />
+          <ElInput v-model="modelValue.other_link" />
           <ElText type="info" size="small">
             在页面关联另外一个链接，填写要关联的链接ID
           </ElText>
@@ -113,8 +113,8 @@ const modelValue = defineModel<any>()
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="第二按钮">
           <ElInput
-            v-model="modelValue.linkButton"
-            :placeholder="modelValue.btnPlaceholder"
+            v-model="modelValue.other_link_button"
+            :placeholder="modelValue.btn_placeholder"
           />
           <ElText type="info" size="small">副按钮文案</ElText>
         </ElFormItem>

@@ -1,16 +1,11 @@
-import { defineStore } from 'pinia'
+const api = directusItem('pays')
 
-import { item } from '#/api'
-import { ok } from '#/helper/assert'
-
-const api = item('pays')
-
-export const usePayStore = defineStore('pay', {
+export const usePayStore = defineStore('payStore', {
   state: () => ({
     payList: [] as App.Pay.Row[],
   }),
   actions: {
-    async addPayItem(item: App.Pay.Row) {
+    async add(item: App.Pay.Row) {
       ok(item.appId, 'AppId 不能为空')
       ok(item.type, '支付类型 不能为空')
       // 代理可管理的支付固定位2
@@ -23,7 +18,7 @@ export const usePayStore = defineStore('pay', {
         })
     },
 
-    async updatePayItem(item: App.Pay.Row) {
+    async update(item: App.Pay.Row) {
       ok(item.appId, 'AppId 不能为空')
       ok(item.type, '支付类型 不能为空')
       // 代理可管理的支付固定位2
