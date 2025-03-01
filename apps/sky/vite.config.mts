@@ -1,12 +1,14 @@
 import { defineConfig } from '@vben/vite-config'
 import AutoImport from 'unplugin-auto-import/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig(async () => {
   return {
     application: {},
     vite: {
       plugins: [
+        vueJsx(),
         ElementPlus({
           format: 'esm',
         }),

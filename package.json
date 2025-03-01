@@ -27,7 +27,6 @@
   "scripts": {
     "sky": "pnpm --filter @vben/sky",
     "sky:zip": "pnpm run build:sky && pnpm run sky zip",
-    "sky:push": "pnpm run sky push",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
     "build:analyze": "turbo build:analyze",
     "build:antd": "pnpm run build --filter=@vben/web-antd",

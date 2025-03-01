@@ -50,9 +50,10 @@
   "devDependencies": {
     "@directus/sdk": "catalog:",
     "@types/extend": "catalog:",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "stylus": "catalog:",
-    "vxe-table": "catalog:",
     "unplugin-auto-import": "catalog:",
-    "unplugin-element-plus": "catalog:"
+    "unplugin-element-plus": "catalog:",
+    "vxe-table": "catalog:"
   }
 }
