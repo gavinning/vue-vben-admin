@@ -38,22 +38,6 @@ const fileList = ref<UploadUserFile[]>([])
     </div>
   </div>
 </template>
-<style lang="stylus">
-.link-upload-preview
-  float left
-  display inline-block
-
-  .el-upload-list__item
-    margin 0
-    padding 0
-    border none
-    border-radius 0
-
-  .el-upload .el-button
-    border-right 0
-    border-top-right-radius 0
-    border-bottom-right-radius 0
-</style>
 <style lang="stylus" scoped>
 .flex
   justify-content space-between

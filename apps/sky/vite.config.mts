@@ -36,6 +36,7 @@ export default defineConfig(async () => {
               '#/helper': ['ok'],
               '#/config': [],
               '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy'],
+              '@vben/stores': ['useAccessStore', 'useUserStore'],
             },
           ],
         }),

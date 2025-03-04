@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {
+  ElButton,
   ElCol,
   ElForm,
   ElFormItem,
@@ -9,23 +10,28 @@ import {
   ElText,
 } from 'element-plus'
 
-const modelValue = defineModel<any>()
+defineProps<{
+  showSubmitButton?: boolean
+}>()
+
+const model = defineModel<any>()
+const submit = () => emitter.emit(AppEvent.Link.Submit)
 </script>
 
 <template>
-  <ElForm :model="modelValue" label-width="auto">
+  <ElForm :model="model" label-width="auto">
     <ElRow :gutter="20">
       <ElCol :span="12">
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="产品">
-          <ElInput disabled :value="modelValue.app?.name" />
+          <ElInput disabled :value="model.app?.name" />
           <!-- <ElText type="info" size="small">给支付起一个名字，方便辨认</ElText> -->
         </ElFormItem>
       </ElCol>
       <ElCol :span="12">
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="链接ID">
-          <ElInput disabled :value="modelValue.id" />
+          <ElInput disabled :value="model.id" />
           <!-- <ElText type="info" size="small">支付帐号备注</ElText> -->
         </ElFormItem>
       </ElCol>
@@ -41,7 +47,7 @@ const modelValue = defineModel<any>()
     </ElRow>
 
     <ElFormItem label-position="top" label="标题">
-      <ElInput v-model="modelValue.title" />
+      <ElInput v-model="model.title" />
       <ElText type="info" size="small">发货时显示标题</ElText>
     </ElFormItem>
 
@@ -49,7 +55,7 @@ const modelValue = defineModel<any>()
       <ElCol :span="12">
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="链接定价" required>
-          <ElInput v-model="modelValue.amount" />
+          <ElInput v-model="model.amount" />
           <ElText type="info" size="small">
             用户购买时需要支付的金额，建议不低于¥20
           </ElText>
@@ -59,7 +65,7 @@ const modelValue = defineModel<any>()
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="推广渠道">
           <ElInput
-            v-model="modelValue.source"
+            v-model="model.source"
             placeholder="渠道统计，如抖音、快手"
           />
           <ElText type="info" size="small">统计不同渠道的订单数据</ElText>
@@ -72,8 +78,8 @@ const modelValue = defineModel<any>()
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="按钮文案">
           <ElInput
-            v-model="modelValue.button"
-            :placeholder="modelValue.btn_placeholder"
+            v-model="model.button"
+            :placeholder="model.btn_placeholder"
           />
           <ElText type="info" size="small">主按钮文案</ElText>
         </ElFormItem>
@@ -86,7 +92,7 @@ const modelValue = defineModel<any>()
           style="display: block"
         >
           <ElSwitch
-            v-model="modelValue.safe_bottom"
+            v-model="model.safe_bottom"
             size="large"
             style="
 
@@ -103,7 +109,7 @@ const modelValue = defineModel<any>()
       <ElCol :span="12">
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="关联链接">
-          <ElInput v-model="modelValue.other_link" />
+          <ElInput v-model="model.other_link" />
           <ElText type="info" size="small">
             在页面关联另外一个链接，填写要关联的链接ID
           </ElText>
@@ -113,8 +119,8 @@ const modelValue = defineModel<any>()
         <div class="grid-content ep-bg-purple"></div>
         <ElFormItem label-position="top" label="第二按钮">
           <ElInput
-            v-model="modelValue.other_link_button"
-            :placeholder="modelValue.btn_placeholder"
+            v-model="model.other_link_button"
+            :placeholder="model.btn_placeholder"
           />
           <ElText type="info" size="small">副按钮文案</ElText>
         </ElFormItem>
@@ -122,13 +128,17 @@ const modelValue = defineModel<any>()
     </ElRow>
     <!--
     <ElFormItem label-position="top" label="描述">
-      <ElInput v-model="modelValue.desc" />
+      <ElInput v-model="model.desc" />
       <ElText type="info" size="small">支付备注</ElText>
     </ElFormItem>
  -->
     <ElFormItem label="发货内容" label-position="top">
-      <ElInput v-model="modelValue.resource" type="textarea" :rows="6" />
+      <ElInput v-model="model.resource" type="textarea" :rows="6" />
       <ElText type="info" size="small">用户支付后可见的发货内容</ElText>
+    </ElFormItem>
+
+    <ElFormItem label-position="top" v-if="showSubmitButton">
+      <ElButton type="primary" @click="submit">保 存</ElButton>
     </ElFormItem>
   </ElForm>
 </template>

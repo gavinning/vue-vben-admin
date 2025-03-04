@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ElAffix, ElContainer, ElMain } from 'element-plus'
+import { ElContainer, ElMain } from 'element-plus'
 
 import { useLinkStore } from '#/store'
 
 import Form from './LinkForm.vue'
-import Preview from './Preview.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -42,12 +41,12 @@ onBeforeUnmount(() => emitter.off(AppEvent.Link.Submit, submit))
 <template>
   <ElContainer>
     <ElMain>
-      <Form v-model="form" />
+      <Form show-submit-button v-model="form" />
     </ElMain>
-    <aside style="width: 375px" class="m-4" id="projects-aside">
+    <!-- <aside style="width: 375px" class="m-4" id="projects-aside">
       <ElAffix :offset="110" target="#projects-aside">
         <Preview v-model="form" />
       </ElAffix>
-    </aside>
+    </aside> -->
   </ElContainer>
 </template>

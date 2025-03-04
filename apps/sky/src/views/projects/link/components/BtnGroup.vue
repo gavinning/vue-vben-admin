@@ -1,14 +1,34 @@
 <script lang="ts" setup>
-import type { UploadUserFile } from 'element-plus'
+import type { UploadInstance, UploadUserFile } from 'element-plus'
 
 import { PreviewEye, SaveIcon } from '@vben/icons'
+import { useAccessStore } from '@vben/stores'
 
-import { Plus } from '@element-plus/icons-vue'
-import { ElButton, ElButtonGroup, ElTooltip, ElUpload } from 'element-plus'
+import { ElButton, ElButtonGroup, ElTooltip } from 'element-plus'
 
+import Upload from '#/components/Upload.vue'
+
+const accessStore = useAccessStore()
+
+const linkStore = useLinkStore()
+const uploadRef = ref<UploadInstance>()
 const fileList = defineModel<UploadUserFile[]>()
 
-const submit = () => emitter.emit(AppEvent.Link.Submit)
+const url = computed(() => {
+  return [
+    'http://localhost:9600/files',
+    `access_token=${accessStore.$state.accessToken}`,
+  ].join('?')
+})
+
+function submit() {
+  linkStore.updateUploadContext({ submit: uploadRef.value!.submit })
+  emitter.emit(AppEvent.Link.Submit)
+}
+
+onMounted(() => {
+  linkStore.resetUploadContext()
+})
 </script>
 <template>
   <ElButtonGroup class="ml-4">
@@ -18,18 +38,7 @@ const submit = () => emitter.emit(AppEvent.Link.Submit)
       placement="top"
       content="上传图片"
     >
-      <ElUpload
-        class="link-upload-preview"
-        action="#"
-        multiple
-        list-type="picture"
-        v-model:file-list="fileList"
-        :limit="10"
-        :show-file-list="false"
-        :auto-upload="false"
-      >
-        <ElButton type="primary" :icon="Plus" />
-      </ElUpload>
+      <Upload :url ref="uploadRef" v-model="fileList" />
     </ElTooltip>
     <ElTooltip
       class="box-item"
