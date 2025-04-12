@@ -1,11 +1,21 @@
 import { useVbenDrawer } from '@vben/common-ui'
 
-import { Form } from '#/components/Form'
 import { Page } from '#/components/Page'
-import { Table, TableProps } from '#/components/Table'
+import { Form } from '#/components/PageTable/Form'
+import { Table, TableProps } from '#/components/PageTable/Table'
 import { diff } from '#/helper'
 
-export const PageTable = defineComponent<TableProps>({
+export interface PageTableProps {
+  columns: TableProps['columns']
+  action: {
+    create?: (row: Item) => Promise<any>
+    query: TableProps['action']['query']
+    remove?: (row: Item) => Promise<any>
+    update?: (row: Item) => Promise<any>
+  }
+}
+
+export const PageTable = defineComponent<PageTableProps>({
   props: ['action', 'columns'],
   setup(props, { slots }) {
     const action = props.action
@@ -33,7 +43,7 @@ export const PageTable = defineComponent<TableProps>({
         `删除无法恢复！确认要删除${row.name ?? row.id ?? ''}吗？`,
         { customStyle: { top: '-20vh' } },
       )
-        .then(() => action.remove?.(row.id))
+        .then(() => action.remove?.(row))
         .then(() => Message.success('删除成功'))
         .catch((error) =>
           error?.message
@@ -47,14 +57,15 @@ export const PageTable = defineComponent<TableProps>({
       if (isEdit.value) {
         const id = editRow.value?.id
         const changes = diff(editRow.value, values)
-        action.update?.(id, changes)
+        changes.id = id
+        action.update?.(changes)
       } else {
         action.create?.(values)
       }
     }
 
     // 创建Table组件的action
-    const tableAction = {
+    const tableAction: TableProps['action'] = {
       query: action.query,
       create,
       update,
@@ -62,6 +73,7 @@ export const PageTable = defineComponent<TableProps>({
     }
 
     // 请求表单的schema
+    // 应该向外转移，由外部传递
     store.getFormSchema()
 
     return () => (

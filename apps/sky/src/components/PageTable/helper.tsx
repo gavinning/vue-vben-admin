@@ -8,20 +8,17 @@ export interface ActionQueryBody {
   total: number
 }
 
-export type ActionCreate = AnyAsyncFunction
-export type ActionDelete = AnyAsyncFunction
-export type ActionUpdate = AnyAsyncFunction
-export type ActionQuery = (
+type ActionQuery = (
   params: VxeGridPropTypes.ProxyAjaxQueryParams,
 ) => Promise<ActionQueryBody>
 
 export interface TableProps {
-  columns: any[]
+  columns: Item[]
   action: {
-    create?: ActionCreate
+    create?: AnyAsyncFunction
     query: ActionQuery
-    remove?: ActionDelete
-    update?: ActionUpdate
+    remove?: (row: Item) => Promise<any>
+    update?: (row: Item) => Promise<any>
   }
   toolbarConfig?: VxeGridPropTypes.ToolbarConfig
   gridOptions?: VxeTableGridOptions
