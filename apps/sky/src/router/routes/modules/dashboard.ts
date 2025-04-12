@@ -21,6 +21,15 @@ const routes: RouteRecordRaw[] = [
           title: '支付',
         },
       },
+      {
+        name: 'Pay1',
+        path: '/dashboard1',
+        component: () => import('#/views/dashboard/pay/index1'),
+        meta: {
+          icon: 'carbon:wallet',
+          title: '支付1',
+        },
+      },
 
       {
         name: 'Trade',

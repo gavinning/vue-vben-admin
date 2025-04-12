@@ -1,8 +1,10 @@
 const api = directusItem('pays')
+const configApi = directusItem('configs')
 
 export const usePayStore = defineStore('payStore', {
   state: () => ({
     payList: [] as App.Pay.Row[],
+    payFormSchema: {} as any,
   }),
   actions: {
     async add(item: App.Pay.Row) {
@@ -29,6 +31,33 @@ export const usePayStore = defineStore('payStore', {
         .catch((error) => {
           throw new Error(`${item.name} 更新失败：${error.message}`)
         })
+    },
+
+    // 优先使用缓存
+    async getFormSchema() {
+      return this.payFormSchema.schema?.length
+        ? this.payFormSchema
+        : this.getFormSchemaRequest()
+    },
+
+    // 获取创建和编辑的表单Schema
+    async getFormSchemaRequest() {
+      const data = await configApi.getOne(
+        { filter: { key: { _eq: 'pays' } } },
+        { withCredentials: false },
+      )
+      const body = data?.map?.body as any
+
+      if (!body) return
+
+      body.schema = body.schema.map((item) => {
+        if (!item.component) item.component = 'Input'
+        return item
+      })
+
+      // console.log(123, body)
+
+      return (this.payFormSchema = body)
     },
   },
 })

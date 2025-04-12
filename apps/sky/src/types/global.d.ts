@@ -5,6 +5,7 @@ declare global {}
 
 // 基础常用扩展
 declare global {
+  export type ID = number | string
   export type Item = Record<string, any>
   export type AnyFunction<T = any> = (...args: any[]) => T
   export type AnyVoidFunction = AnyFunction<void>

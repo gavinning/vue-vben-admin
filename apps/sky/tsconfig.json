@@ -4,6 +4,9 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "vue",
+    "verbatimModuleSyntax": false,
+    // 允许隐式any类型
+    "noImplicitAny": false,
 
     "baseUrl": ".",
     "paths": {

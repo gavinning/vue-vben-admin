@@ -5,7 +5,7 @@ import type { VxeGridProps } from '#/adapter/vxe-table'
 import { useVbenVxeGrid } from '#/adapter/vxe-table'
 
 export interface GridOptions {
-  columns: Item[]
+  columns: any[]
   proxyConfig?: VxeGridPropTypes.ProxyConfig<any>
   toolbarConfig?: VxeGridPropTypes.ToolbarConfig
 }

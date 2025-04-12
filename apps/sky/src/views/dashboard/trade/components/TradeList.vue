@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { GridOptions } from '#/components/Table'
+import type { GridOptions } from '#/components/Table1'
 
 import { ElButton, ElTag } from 'element-plus'
 import { AppEvent, emitter } from 'sky/core'
 
 import { getListBridge } from '#/api/directus'
-import { defineGird } from '#/components/Table'
+import { defineGird } from '#/components/Table1'
 
 const columns = [
   { title: '序号', type: 'seq', width: 50 },

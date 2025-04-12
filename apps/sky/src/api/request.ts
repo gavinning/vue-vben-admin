@@ -67,6 +67,13 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
 
       config.headers.Authorization = formatToken(accessStore.accessToken)
       config.headers['Accept-Language'] = preferences.app.locale
+
+      // 这里需要用到 === 因为默认值是 undefined
+      // 如果设置了不携带token，则删除Authorization
+      if (config.withCredentials === false) {
+        delete config.headers.Authorization
+      }
+
       return config
     },
   })
