@@ -3,6 +3,8 @@ import { ElTag } from 'element-plus'
 import { getListBridge } from '#/api/directus'
 import { PageTable, PageTableProps } from '#/components/PageTable'
 
+const store = usePayStore()
+
 const columns = [
   { title: '序号', type: 'seq', width: 50 },
   { field: 'name', title: '名字' },
@@ -20,17 +22,20 @@ const action: PageTableProps['action'] = {
 
   // 新增数据事件
   create: async (row: Item) => {
-    console.warn('create clicked:', row)
+    debug.log('action:create:', row)
+    store.add(row)
   },
 
   // 更新数据事件
   update: async (row: Item) => {
-    console.warn('update clicked:', row)
+    debug.log('action:update:', row)
+    store.update(row)
   },
 
   // 删除数据事件 不需要删除则不传改参数
   remove: async (row: Item) => {
-    console.warn('remove clicked:', row.id)
+    debug.log('action:remove:', row.id)
+    store.remove(row)
   },
 }
 

@@ -21,9 +21,12 @@ export const Form = defineComponent<FormProps>({
   setup(props) {
     const [Form, FormApi] = useVbenForm(props.schema)
 
-    watch(props.values, (val) => {
-      FormApi.setValues(val)
-    })
+    watch(
+      () => props.values,
+      (val) => {
+        FormApi.setValues(val)
+      },
+    )
 
     FormApi.setValues(props.values)
 

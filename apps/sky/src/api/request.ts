@@ -51,9 +51,12 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   async function doRefreshToken() {
     const accessStore = useAccessStore()
     const resp = await refreshTokenApi()
-    const newToken = resp.data
-    accessStore.setAccessToken(newToken)
-    return newToken
+    if (resp) {
+      const newToken = resp.access_token
+      accessStore.setAccessToken(newToken)
+      return newToken
+    }
+    throw new Error('Refresh token failed')
   }
 
   function formatToken(token: null | string) {

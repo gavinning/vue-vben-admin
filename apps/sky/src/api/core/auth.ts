@@ -1,7 +1,5 @@
 import { username2email } from '@4a/helper'
 
-import { baseRequestClient, requestClient } from '../request'
-
 export namespace AuthApi {
   /** 登录接口参数 */
   export interface LoginParams {
@@ -30,15 +28,7 @@ export namespace AuthApi {
  * 登录
  */
 export async function loginApi(data: AuthApi.LoginParams) {
-  return loginBridge({
-    email: username2email(data.username ?? ''),
-    password: data.password ?? '',
-  })
-}
-
-// 001 登录桥接
-async function loginBridge(data: AuthApi.loginBridgeParams) {
-  const ret = await requestClient.post('/auth/login', data)
+  const ret = await actor.auth.login(loginTransform(data))
   return {
     accessToken: ret.access_token,
     expires: ret.expires,
@@ -46,22 +36,26 @@ async function loginBridge(data: AuthApi.loginBridgeParams) {
   }
 }
 
+// 001 登录参数转换
+function loginTransform(data: AuthApi.LoginParams) {
+  return {
+    email: username2email(data.username ?? ''),
+    password: data.password ?? '',
+  }
+}
+
 /**
  * 刷新accessToken
  */
 export async function refreshTokenApi() {
-  return baseRequestClient.post<AuthApi.RefreshTokenResult>('/auth/refresh', {
-    withCredentials: true,
-  })
+  return actor.auth.refresh()
 }
 
 /**
  * 退出登录
  */
 export async function logoutApi() {
-  return baseRequestClient.post('/auth/logout', {
-    withCredentials: true,
-  })
+  return actor.auth.logout()
 }
 
 /**

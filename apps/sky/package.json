@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@4a/helper": "workspace:*",
+    "@directus/sdk": "catalog:",
     "@element-plus/icons-vue": "catalog:",
     "@vben/access": "workspace:*",
     "@vben/common-ui": "workspace:*",
@@ -40,16 +41,18 @@
     "@vben/utils": "workspace:*",
     "@vueuse/core": "catalog:",
     "dayjs": "catalog:",
+    "debug": "catalog:",
     "element-plus": "catalog:",
     "es-toolkit": "^1.32.0",
     "extend": "catalog:",
     "pinia": "catalog:",
     "sky": "workspace:*",
     "vue": "catalog:",
-    "vue-router": "catalog:"
+    "vue-router": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@directus/sdk": "catalog:",
+    "@types/debug": "^4.1.12",
     "@types/extend": "catalog:",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "stylus": "catalog:",

@@ -44,11 +44,8 @@ export const PageTable = defineComponent<PageTableProps>({
         { customStyle: { top: '-20vh' } },
       )
         .then(() => action.remove?.(row))
-        .then(() => Message.success('删除成功'))
         .catch((error) =>
-          error?.message
-            ? Message.error(error.message)
-            : Message.info('取消删除'),
+          error?.message ? catchError(error) : Message.info('取消删除'),
         )
     }
 
