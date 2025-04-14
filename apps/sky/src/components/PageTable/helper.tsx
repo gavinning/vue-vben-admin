@@ -1,8 +1,14 @@
-import type { RenderAction, TableProps } from './type'
+import type {
+  RenderAction,
+  TableAction,
+  TableControl,
+  TableProps,
+} from './type'
 
 import { ElButton } from 'element-plus'
 
 import { useVbenVxeGrid, VxeTableGridOptions } from '#/adapter/vxe-table'
+import { getListBridge } from '#/api/directus'
 
 // 操作列的默认配置
 const defaultActionColumn = {
@@ -89,4 +95,31 @@ export const defineGrid = (props: TableProps) => {
   )
 
   return useVbenVxeGrid({ gridOptions })
+}
+
+export const getEasyAction = (
+  collection: string,
+  ctrl: TableControl = {},
+): TableAction => {
+  const api = actorItem2(collection)
+
+  // 必须，渲染列表请求接口
+  const query = getListBridge(collection)
+
+  // 可选，新增数据事件
+  const create = (row: Item) => api.add(row)
+
+  // 可选，更新数据事件
+  const update = async (row: Item) => api.update(row)
+
+  // 可选，删除数据事件
+  const remove = async (row: Item) => api.remove(row)
+
+  const action: TableAction = { query }
+
+  if (ctrl.create) action.create = create
+  if (ctrl.update) action.update = update
+  if (ctrl.remove) action.remove = remove
+
+  return action
 }

@@ -1,26 +1,12 @@
-const api = actorItem2('pays')
 const configApi = directusItem('configs')
 
 export const usePayStore = defineStore('payStore', {
   state: () => ({
     payList: [] as App.Pay.Row[],
+    payColumns: [] as any[],
     payFormSchema: {} as any,
   }),
   actions: {
-    // @deprecated
-    async add(row: Item) {
-      return api.add(row)
-    },
-
-    // @deprecated
-    async update(row: Item) {
-      return api.update(row)
-    },
-
-    async remove(row: Item) {
-      return api.remove(row)
-    },
-
     // 优先使用缓存
     async getFormSchema() {
       return this.payFormSchema.schema?.length
@@ -34,18 +20,16 @@ export const usePayStore = defineStore('payStore', {
         { filter: { key: { _eq: 'pays' } } },
         { withCredentials: false },
       )
-      const form = data?.map?.form as any
+      const form = (data?.map?.form as any) || {}
+      const columns = (data?.map?.columns as any[]) || []
 
-      if (!form) return
-
-      form.schema = form.schema.map((item) => {
+      form.schema = form.schema?.map((item) => {
         if (!item.component) item.component = 'Input'
         return item
       })
 
-      // console.log(123, form)
-
-      return (this.payFormSchema = form)
+      this.payColumns = columns
+      this.payFormSchema = form
     },
   },
 })

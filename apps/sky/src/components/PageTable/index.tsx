@@ -8,6 +8,7 @@ import { diff } from '#/helper'
 
 import { defineGrid, renderAction } from './helper'
 
+export { getEasyAction } from './helper'
 export * from './type'
 
 export const Table = defineComponent<TableProps>({

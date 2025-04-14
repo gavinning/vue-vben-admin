@@ -12,6 +12,12 @@ type ActionQuery = (
   params: VxeGridPropTypes.ProxyAjaxQueryParams,
 ) => Promise<ActionQueryBody>
 
+export interface TableControl {
+  create?: boolean
+  update?: boolean
+  remove?: boolean
+}
+
 export interface TableAction {
   /**
    * 表格渲染数据查询方法
