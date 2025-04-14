@@ -15,29 +15,28 @@ const routes: RouteRecordRaw[] = [
       {
         name: 'Pay',
         path: '/dashboard',
-        component: () => import('#/views/dashboard/pay/index.vue'),
+        component: () => import('#/views/dashboard/pay'),
         meta: {
           icon: 'carbon:wallet',
           title: '支付',
         },
       },
       {
-        name: 'Pay1',
-        path: '/dashboard1',
-        component: () => import('#/views/dashboard/pay/index1'),
-        meta: {
-          icon: 'carbon:wallet',
-          title: '支付1',
-        },
-      },
-
-      {
         name: 'Trade',
         path: '/trades',
-        component: () => import('#/views/dashboard/trade/index.vue'),
+        component: () => import('#/views/dashboard/trade'),
         meta: {
           icon: 'carbon:list',
           title: '订单',
+        },
+      },
+      {
+        name: 'Link',
+        path: '/links',
+        component: () => import('#/views/dashboard/link'),
+        meta: {
+          icon: 'carbon:link',
+          title: '链接',
         },
       },
     ],

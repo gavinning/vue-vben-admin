@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import PayEdit from './components/PayEdit.vue'
-import PayList from './components/PayList.vue'
+import PayEdit from './PayEdit.vue'
+import PayList from './PayList.vue'
 </script>
 
 <template>

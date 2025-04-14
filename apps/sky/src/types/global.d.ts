@@ -41,6 +41,7 @@ declare global {
       export interface Row {
         id?: ID
         tradeid: string
+        status: number
       }
     }
 

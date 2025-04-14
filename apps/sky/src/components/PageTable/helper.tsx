@@ -123,3 +123,19 @@ export const getEasyAction = (
 
   return action
 }
+
+// 格式化CUD功能
+export const formatCUD = (cud?: string) => {
+  if (!cud)
+    return {
+      create: false,
+      update: false,
+      remove: false,
+    }
+  const str = new Set(cud.slice(0, 3))
+  return {
+    create: str.has('c'),
+    update: str.has('u'),
+    remove: str.has('d'),
+  }
+}

@@ -38,7 +38,7 @@ export function catchError(err: any, isNotice?: boolean) {
     message = getAxiosError(err)
   }
 
-  debug.error(message)
+  debug.error(err)
   isNotice ? Notice.error(message) : Message.error(message)
 }
 

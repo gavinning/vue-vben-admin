@@ -82,6 +82,7 @@ declare global {
   const useLink: (typeof import('vue-router'))['useLink']
   const useLinkStore: (typeof import('#/store'))['useLinkStore']
   const useModel: (typeof import('vue'))['useModel']
+  const usePageTableStore: (typeof import('#/store'))['usePageTableStore']
   const usePayStore: (typeof import('#/store'))['usePayStore']
   const useRoute: (typeof import('vue-router'))['useRoute']
   const useRouter: (typeof import('vue-router'))['useRouter']

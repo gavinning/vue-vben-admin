@@ -25,7 +25,7 @@ export default defineConfig(async () => {
               '#/config': [],
               '#/exception': ['catchError'],
               '#/helper': ['ok', 'filterFromArray', 'debug'],
-              '#/store': ['usePayStore', 'useLinkStore'],
+              '#/store': ['usePayStore', 'useLinkStore', 'usePageTableStore'],
               '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy'],
               '@vben/stores': ['useAccessStore', 'useUserStore'],
               'element-plus': [

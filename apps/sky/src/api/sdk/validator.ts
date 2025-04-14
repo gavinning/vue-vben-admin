@@ -16,18 +16,29 @@ class Table<R extends Item> {
   }
 
   async add(row: R) {
+    this.checkValidator()
     this.validator.add?.parse(row)
     return this.api.createOne<R>(row)
   }
 
   async remove(row: R) {
+    this.checkValidator()
     this.validator.remove?.parse(row)
     return this.api.deleteOne(row.id)
   }
 
   async update(row: R) {
+    this.checkValidator()
     this.validator.update?.parse(row)
     return this.api.updateOne(row.id, row)
+  }
+
+  private checkValidator() {
+    if (!this.validator) {
+      throw new Error(
+        `No validator for ${this.collection}, api/sdk/validator_config.ts`,
+      )
+    }
   }
 }
 

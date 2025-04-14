@@ -8,7 +8,7 @@ import { diff } from '#/helper'
 
 import { defineGrid, renderAction } from './helper'
 
-export { getEasyAction } from './helper'
+export { formatCUD, getEasyAction } from './helper'
 export * from './type'
 
 export const Table = defineComponent<TableProps>({
@@ -34,22 +34,28 @@ export const Table = defineComponent<TableProps>({
     // 用于处理Drawer的操作
     const proxyRenderAction: RenderAction = {
       query: action.query,
-      create: () => {
+      // 下面的功能，根据action值决定是否启用
+      create: undefined as TableProps['action']['create'],
+      update: undefined as TableProps['action']['update'],
+      remove: undefined as TableProps['action']['remove'],
+    }
+
+    if (action.create) {
+      proxyRenderAction.create = () => {
         isEdit.value = false
         drawerApi.open()
-      },
-      update: async (row: Item) => {
+      }
+    }
+
+    if (action.update) {
+      proxyRenderAction.update = async (row: Item) => {
         isEdit.value = true
         editRow.value = row
         formApi.setValues(row)
         drawerApi.open()
-      },
-      // 删除操作
-      // 在下面判断，根据action.remove决定是否启用删除操作
-      remove: undefined as TableProps['action']['remove'],
+      }
     }
 
-    // 如果外部传递了remove方法，则启用删除操作
     if (action.remove) {
       proxyRenderAction.remove = async (row: Item) => {
         return Popover.confirm(

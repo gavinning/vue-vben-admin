@@ -18,6 +18,13 @@ export const validator = {
     }),
     remove,
   },
+
+  links: {
+    add: z.object({
+      app: z.number().or(z.string()),
+      amount: z.string(),
+    }),
+  },
 }
 
 export type ValidatorKey = keyof typeof validator
