@@ -44,9 +44,9 @@
     "dayjs": "catalog:",
     "element-plus": "catalog:",
     "pinia": "catalog:",
+    "sky": "workspace:*",
     "vue": "catalog:",
-    "vue-router": "catalog:",
-    "sky": "workspace:*"
+    "vue-router": "catalog:"
   },
   "devDependencies": {
     "unplugin-element-plus": "catalog:"

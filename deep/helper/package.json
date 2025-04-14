@@ -2,6 +2,9 @@
   "name": "@4a/helper",
   "version": "0.0.1",
   "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "gavinning <gavinning@qq.com>",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,9 +17,6 @@
   "prettier": {
     "semi": false
   },
-  "keywords": [],
-  "author": "gavinning <gavinning@qq.com>",
-  "license": "MIT",
   "dependencies": {
     "extend": "catalog:"
   },

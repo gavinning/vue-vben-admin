@@ -4,10 +4,10 @@ import type {
   WorkbenchQuickNavItem,
   WorkbenchTodoItem,
   WorkbenchTrendItem,
-} from '@vben/common-ui';
+} from '@vben/common-ui'
 
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import {
   AnalysisChartCard,
@@ -16,14 +16,14 @@ import {
   WorkbenchQuickNav,
   WorkbenchTodo,
   WorkbenchTrends,
-} from '@vben/common-ui';
-import { preferences } from '@vben/preferences';
-import { useUserStore } from '@vben/stores';
-import { openWindow } from '@vben/utils';
+} from '@vben/common-ui'
+import { preferences } from '@vben/preferences'
+import { useUserStore } from '@vben/stores'
+import { openWindow } from '@vben/utils'
 
-import AnalyticsVisitsSource from '../analytics/analytics-visits-source.vue';
+import AnalyticsVisitsSource from '../analytics/analytics-visits-source.vue'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
 // 这是一个示例数据，实际项目中需要根据实际情况进行调整
 // url 也可以是内部路由，在 navTo 方法中识别处理，进行内部跳转
@@ -83,7 +83,7 @@ const projectItems: WorkbenchProjectItem[] = [
     title: 'Js',
     url: 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript',
   },
-];
+]
 
 // 同样，这里的 url 也可以使用以 http 开头的外部链接
 const quickNavItems: WorkbenchQuickNavItem[] = [
@@ -123,7 +123,7 @@ const quickNavItems: WorkbenchQuickNavItem[] = [
     title: '图表',
     url: '/analytics',
   },
-];
+]
 
 const todoItems = ref<WorkbenchTodoItem[]>([
   {
@@ -156,7 +156,7 @@ const todoItems = ref<WorkbenchTodoItem[]>([
     date: '2024-07-30 11:00:00',
     title: '修复UI显示问题',
   },
-]);
+])
 const trendItems: WorkbenchTrendItem[] = [
   {
     avatar: 'svg:avatar-1',
@@ -212,23 +212,23 @@ const trendItems: WorkbenchTrendItem[] = [
     date: '2021-03-01 20:00',
     title: 'Vben',
   },
-];
+]
 
-const router = useRouter();
+const router = useRouter()
 
 // 这是一个示例方法，实际项目中需要根据实际情况进行调整
 // This is a sample method, adjust according to the actual project requirements
 function navTo(nav: WorkbenchProjectItem | WorkbenchQuickNavItem) {
   if (nav.url?.startsWith('http')) {
-    openWindow(nav.url);
-    return;
+    openWindow(nav.url)
+    return
   }
   if (nav.url?.startsWith('/')) {
     router.push(nav.url).catch((error) => {
-      console.error('Navigation failed:', error);
-    });
+      console.error('Navigation failed:', error)
+    })
   } else {
-    console.warn(`Unknown URL for navigation item: ${nav.title} -> ${nav.url}`);
+    console.warn(`Unknown URL for navigation item: ${nav.title} -> ${nav.url}`)
   }
 }
 </script>

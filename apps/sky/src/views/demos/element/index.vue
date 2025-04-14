@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-import { Page } from '@vben/common-ui';
+import { Page } from '@vben/common-ui'
 
 import {
   ElButton,
@@ -11,28 +11,28 @@ import {
   ElSegmented,
   ElSpace,
   ElTable,
-} from 'element-plus';
+} from 'element-plus'
 
-type NotificationType = 'error' | 'info' | 'success' | 'warning';
+type NotificationType = 'error' | 'info' | 'success' | 'warning'
 
 function info() {
-  ElMessage.info('How many roads must a man walk down');
+  ElMessage.info('How many roads must a man walk down')
 }
 
 function error() {
   ElMessage.error({
     duration: 2500,
     message: 'Once upon a time you dressed so fine',
-  });
+  })
 }
 
 function warning() {
-  ElMessage.warning('How many roads must a man walk down');
+  ElMessage.warning('How many roads must a man walk down')
 }
 function success() {
   ElMessage.success(
     'Cause you walked hand in hand With another man in my place',
-  );
+  )
 }
 
 function notify(type: NotificationType) {
@@ -40,7 +40,7 @@ function notify(type: NotificationType) {
     duration: 2500,
     message: '说点啥呢',
     type,
-  });
+  })
 }
 const tableData = [
   { prop1: '1', prop2: 'A' },
@@ -49,11 +49,11 @@ const tableData = [
   { prop1: '4', prop2: 'D' },
   { prop1: '5', prop2: 'E' },
   { prop1: '6', prop2: 'F' },
-];
+]
 
-const segmentedValue = ref('Mon');
+const segmentedValue = ref('Mon')
 
-const segmentedOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const segmentedOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 </script>
 
 <template>

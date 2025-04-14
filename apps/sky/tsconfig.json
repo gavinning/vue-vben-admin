@@ -4,14 +4,14 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    "verbatimModuleSyntax": false,
-    // 允许隐式any类型
-    "noImplicitAny": false,
 
     "baseUrl": ".",
     "paths": {
       "#/*": ["./src/*"]
-    }
+    },
+    // 允许隐式any类型
+    "noImplicitAny": false,
+    "verbatimModuleSyntax": false
   },
   "references": [{ "path": "./tsconfig.node.json" }],
   "include": [

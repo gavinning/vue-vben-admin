@@ -1,10 +1,10 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
-import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@vben/constants';
+import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@vben/constants'
 
-import { AuthPageLayout, BasicLayout } from '#/layouts';
-import { $t } from '#/locales';
-import Login from '#/views/_core/authentication/login.vue';
+import { AuthPageLayout, BasicLayout } from '#/layouts'
+import { $t } from '#/locales'
+import Login from '#/views/_core/authentication/login.vue'
 
 /** 全局404页面 */
 const fallbackNotFoundRoute: RouteRecordRaw = {
@@ -17,7 +17,7 @@ const fallbackNotFoundRoute: RouteRecordRaw = {
   },
   name: 'FallbackNotFound',
   path: '/:path(.*)*',
-};
+}
 
 /** 基本路由，这些路由是必须存在的 */
 const coreRoutes: RouteRecordRaw[] = [
@@ -91,6 +91,6 @@ const coreRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-];
+]
 
-export { coreRoutes, fallbackNotFoundRoute };
+export { coreRoutes, fallbackNotFoundRoute }

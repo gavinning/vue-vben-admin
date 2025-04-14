@@ -16,14 +16,8 @@ class Table<R extends Item> {
   }
 
   async add(row: R) {
-    try {
-      this.validator.add?.parse(row)
-      const data = await this.api.createOne<R>(row)
-      Message.success(`添加成功`)
-      return data
-    } catch (error) {
-      catchError(error)
-    }
+    this.validator.add?.parse(row)
+    return this.api.createOne<R>(row)
   }
 
   async remove(row: R) {

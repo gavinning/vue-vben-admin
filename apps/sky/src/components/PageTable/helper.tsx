@@ -1,28 +1,8 @@
+import type { RenderAction, TableProps } from './type'
+
 import { ElButton } from 'element-plus'
-import { VxeGridPropTypes } from 'vxe-table'
 
 import { useVbenVxeGrid, VxeTableGridOptions } from '#/adapter/vxe-table'
-
-export interface ActionQueryBody {
-  items: any[]
-  total: number
-}
-
-type ActionQuery = (
-  params: VxeGridPropTypes.ProxyAjaxQueryParams,
-) => Promise<ActionQueryBody>
-
-export interface TableProps {
-  columns: Item[]
-  action: {
-    create?: AnyAsyncFunction
-    query: ActionQuery
-    remove?: (row: Item) => Promise<any>
-    update?: (row: Item) => Promise<any>
-  }
-  toolbarConfig?: VxeGridPropTypes.ToolbarConfig
-  gridOptions?: VxeTableGridOptions
-}
 
 // 操作列的默认配置
 const defaultActionColumn = {
@@ -56,7 +36,7 @@ const defaultAction = (row: App.Pay.Row, action: TableProps['action']) => (
   </div>
 )
 
-export const renderAction = (action: TableProps['action']) => ({
+export const renderAction = (action: RenderAction) => ({
   action: ({ row }: Record<'row', App.Pay.Row>) => defaultAction(row, action),
   'toolbar-tools': () => (
     <ElButton

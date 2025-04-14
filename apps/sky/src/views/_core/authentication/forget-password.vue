@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import type { VbenFormSchema } from '@vben/common-ui';
-import type { Recordable } from '@vben/types';
+import type { VbenFormSchema } from '@vben/common-ui'
+import type { Recordable } from '@vben/types'
 
-import { computed, ref } from 'vue';
+import { computed, ref } from 'vue'
 
-import { AuthenticationForgetPassword, z } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { AuthenticationForgetPassword, z } from '@vben/common-ui'
+import { $t } from '@vben/locales'
 
-defineOptions({ name: 'ForgetPassword' });
+defineOptions({ name: 'ForgetPassword' })
 
-const loading = ref(false);
+const loading = ref(false)
 
 const formSchema = computed((): VbenFormSchema[] => {
   return [
@@ -25,12 +25,12 @@ const formSchema = computed((): VbenFormSchema[] => {
         .min(1, { message: $t('authentication.emailTip') })
         .email($t('authentication.emailValidErrorTip')),
     },
-  ];
-});
+  ]
+})
 
 function handleSubmit(value: Recordable<any>) {
   // eslint-disable-next-line no-console
-  console.log('reset email:', value);
+  console.log('reset email:', value)
 }
 </script>
 

@@ -1,19 +1,19 @@
 <script lang="ts" setup>
-import type { EchartsUIType } from '@vben/plugins/echarts';
+import type { EchartsUIType } from '@vben/plugins/echarts'
 
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
 
-import { EchartsUI, useEcharts } from '@vben/plugins/echarts';
+import { EchartsUI, useEcharts } from '@vben/plugins/echarts'
 
-const chartRef = ref<EchartsUIType>();
-const { renderEcharts } = useEcharts(chartRef);
+const chartRef = ref<EchartsUIType>()
+const { renderEcharts } = useEcharts(chartRef)
 
 onMounted(() => {
   renderEcharts({
     series: [
       {
         animationDelay() {
-          return Math.random() * 400;
+          return Math.random() * 400
         },
         animationEasing: 'exponentialInOut',
         animationType: 'scale',
@@ -25,7 +25,7 @@ onMounted(() => {
           { name: '技术支持', value: 274 },
           { name: '远程', value: 400 },
         ].sort((a, b) => {
-          return a.value - b.value;
+          return a.value - b.value
         }),
         name: '商业占比',
         radius: '80%',
@@ -37,8 +37,8 @@ onMounted(() => {
     tooltip: {
       trigger: 'item',
     },
-  });
-});
+  })
+})
 </script>
 
 <template>

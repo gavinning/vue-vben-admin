@@ -1,24 +1,24 @@
 <script lang="ts" setup>
-import type { AnalysisOverviewItem } from '@vben/common-ui';
-import type { TabOption } from '@vben/types';
+import type { AnalysisOverviewItem } from '@vben/common-ui'
+import type { TabOption } from '@vben/types'
 
 import {
   AnalysisChartCard,
   AnalysisChartsTabs,
   AnalysisOverview,
-} from '@vben/common-ui';
+} from '@vben/common-ui'
 import {
   SvgBellIcon,
   SvgCakeIcon,
   SvgCardIcon,
   SvgDownloadIcon,
-} from '@vben/icons';
+} from '@vben/icons'
 
-import AnalyticsTrends from './analytics-trends.vue';
-import AnalyticsVisitsData from './analytics-visits-data.vue';
-import AnalyticsVisitsSales from './analytics-visits-sales.vue';
-import AnalyticsVisitsSource from './analytics-visits-source.vue';
-import AnalyticsVisits from './analytics-visits.vue';
+import AnalyticsTrends from './analytics-trends.vue'
+import AnalyticsVisitsData from './analytics-visits-data.vue'
+import AnalyticsVisitsSales from './analytics-visits-sales.vue'
+import AnalyticsVisitsSource from './analytics-visits-source.vue'
+import AnalyticsVisits from './analytics-visits.vue'
 
 const overviewItems: AnalysisOverviewItem[] = [
   {
@@ -49,7 +49,7 @@ const overviewItems: AnalysisOverviewItem[] = [
     totalValue: 50_000,
     value: 5000,
   },
-];
+]
 
 const chartTabs: TabOption[] = [
   {
@@ -60,7 +60,7 @@ const chartTabs: TabOption[] = [
     label: '月访问量',
     value: 'visits',
   },
-];
+]
 </script>
 
 <template>

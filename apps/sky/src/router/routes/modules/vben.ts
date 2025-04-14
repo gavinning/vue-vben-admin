@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
 import {
   VBEN_ANT_PREVIEW_URL,
@@ -6,11 +6,11 @@ import {
   VBEN_GITHUB_URL,
   VBEN_LOGO_URL,
   VBEN_NAIVE_PREVIEW_URL,
-} from '@vben/constants';
-import { SvgAntdvLogoIcon } from '@vben/icons';
+} from '@vben/constants'
+import { SvgAntdvLogoIcon } from '@vben/icons'
 
-import { IFrameView } from '#/layouts';
-import { $t } from '#/locales';
+import { IFrameView } from '#/layouts'
+import { $t } from '#/locales'
 
 const routes: RouteRecordRaw[] = import.meta.env.PROD
   ? []
@@ -79,6 +79,6 @@ const routes: RouteRecordRaw[] = import.meta.env.PROD
           order: 9999,
         },
       },
-    ];
+    ]
 
-export default routes;
+export default routes

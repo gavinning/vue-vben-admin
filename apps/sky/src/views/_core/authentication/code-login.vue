@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import type { VbenFormSchema } from '@vben/common-ui';
-import type { Recordable } from '@vben/types';
+import type { VbenFormSchema } from '@vben/common-ui'
+import type { Recordable } from '@vben/types'
 
-import { computed, ref } from 'vue';
+import { computed, ref } from 'vue'
 
-import { AuthenticationCodeLogin, z } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { AuthenticationCodeLogin, z } from '@vben/common-ui'
+import { $t } from '@vben/locales'
 
-defineOptions({ name: 'CodeLogin' });
+defineOptions({ name: 'CodeLogin' })
 
-const loading = ref(false);
-const CODE_LENGTH = 6;
+const loading = ref(false)
+const CODE_LENGTH = 6
 
 const formSchema = computed((): VbenFormSchema[] => {
   return [
@@ -36,8 +36,8 @@ const formSchema = computed((): VbenFormSchema[] => {
           const text =
             countdown > 0
               ? $t('authentication.sendText', [countdown])
-              : $t('authentication.sendCode');
-          return text;
+              : $t('authentication.sendCode')
+          return text
         },
         placeholder: $t('authentication.code'),
       },
@@ -47,8 +47,8 @@ const formSchema = computed((): VbenFormSchema[] => {
         message: $t('authentication.codeTip', [CODE_LENGTH]),
       }),
     },
-  ];
-});
+  ]
+})
 /**
  * 异步处理登录操作
  * Asynchronously handle the login process
@@ -56,7 +56,7 @@ const formSchema = computed((): VbenFormSchema[] => {
  */
 async function handleLogin(values: Recordable<any>) {
   // eslint-disable-next-line no-console
-  console.log(values);
+  console.log(values)
 }
 </script>
 

@@ -1,7 +1,7 @@
 import { ElTag } from 'element-plus'
 
 import { getListBridge } from '#/api/directus'
-import { PageTable, PageTableProps } from '#/components/PageTable'
+import { Table, TableProps } from '#/components/PageTable'
 
 const store = usePayStore()
 
@@ -16,26 +16,28 @@ const columns = [
   { field: 'date_updated', formatter: 'formatDateTime', title: '更新时间' },
 ]
 
-const action: PageTableProps['action'] = {
+const api = actorItem2('pays')
+
+const action: TableProps['action'] = {
   // 渲染列表，列表请求接口
   query: getListBridge('pays'),
 
   // 新增数据事件
   create: async (row: Item) => {
     debug.log('action:create:', row)
-    store.add(row)
+    return api.add(row)
   },
 
   // 更新数据事件
   update: async (row: Item) => {
     debug.log('action:update:', row)
-    store.update(row)
+    return api.update(row)
   },
 
   // 删除数据事件 不需要删除则不传改参数
   remove: async (row: Item) => {
     debug.log('action:remove:', row.id)
-    store.remove(row)
+    return api.remove(row)
   },
 }
 
@@ -51,12 +53,18 @@ const renderTag = () => ({
   enabled: ({ row }: Record<'row', App.Pay.Row>) => Tag(row),
 })
 
+store.getFormSchema()
+
 export default defineComponent({
   setup() {
     return () => (
-      <PageTable action={action} class="p-5" columns={columns}>
+      <Table
+        action={action}
+        columns={columns}
+        formRenderSchema={store.payFormSchema}
+      >
         {renderTag()}
-      </PageTable>
+      </Table>
     )
   },
 })

@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import type { VbenFormSchema } from '@vben/common-ui';
-import type { Recordable } from '@vben/types';
+import type { VbenFormSchema } from '@vben/common-ui'
+import type { Recordable } from '@vben/types'
 
-import { computed, h, ref } from 'vue';
+import { computed, h, ref } from 'vue'
 
-import { AuthenticationRegister, z } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { AuthenticationRegister, z } from '@vben/common-ui'
+import { $t } from '@vben/locales'
 
-defineOptions({ name: 'Register' });
+defineOptions({ name: 'Register' })
 
-const loading = ref(false);
+const loading = ref(false)
 
 const formSchema = computed((): VbenFormSchema[] => {
   return [
@@ -33,7 +33,7 @@ const formSchema = computed((): VbenFormSchema[] => {
       renderComponentContent() {
         return {
           strengthText: () => $t('authentication.passwordStrength'),
-        };
+        }
       },
       rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
     },
@@ -44,13 +44,13 @@ const formSchema = computed((): VbenFormSchema[] => {
       },
       dependencies: {
         rules(values) {
-          const { password } = values;
+          const { password } = values
           return z
             .string({ required_error: $t('authentication.passwordTip') })
             .min(1, { message: $t('authentication.passwordTip') })
             .refine((value) => value === password, {
               message: $t('authentication.confirmPasswordTip'),
-            });
+            })
         },
         triggerFields: ['password'],
       },
@@ -78,12 +78,12 @@ const formSchema = computed((): VbenFormSchema[] => {
         message: $t('authentication.agreeTip'),
       }),
     },
-  ];
-});
+  ]
+})
 
 function handleSubmit(value: Recordable<any>) {
   // eslint-disable-next-line no-console
-  console.log('register submit:', value);
+  console.log('register submit:', value)
 }
 </script>
 

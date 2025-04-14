@@ -3,15 +3,15 @@
  * 可用于 vben-form、vben-modal、vben-drawer 等组件使用,
  */
 
-import type { Component, SetupContext } from 'vue';
+import type { Component, SetupContext } from 'vue'
 
-import type { BaseFormComponentType } from '@vben/common-ui';
-import type { Recordable } from '@vben/types';
+import type { BaseFormComponentType } from '@vben/common-ui'
+import type { Recordable } from '@vben/types'
 
-import { h } from 'vue';
+import { h } from 'vue'
 
-import { ApiComponent, globalShareState, IconPicker } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { ApiComponent, globalShareState, IconPicker } from '@vben/common-ui'
+import { $t } from '@vben/locales'
 
 import {
   ElButton,
@@ -32,17 +32,17 @@ import {
   ElTimePicker,
   ElTreeSelect,
   ElUpload,
-} from 'element-plus';
+} from 'element-plus'
 
 const withDefaultPlaceholder = <T extends Component>(
   component: T,
   type: 'input' | 'select',
 ) => {
   return (props: any, { attrs, slots }: Omit<SetupContext, 'expose'>) => {
-    const placeholder = props?.placeholder || $t(`ui.placeholder.${type}`);
-    return h(component, { ...props, ...attrs, placeholder }, slots);
-  };
-};
+    const placeholder = props?.placeholder || $t(`ui.placeholder.${type}`)
+    return h(component, { ...props, ...attrs, placeholder }, slots)
+  }
+}
 
 // 这里需要自行根据业务组件库进行适配，需要用到的组件都需要在这里类型说明
 export type ComponentType =
@@ -62,7 +62,7 @@ export type ComponentType =
   | 'TimePicker'
   | 'TreeSelect'
   | 'Upload'
-  | BaseFormComponentType;
+  | BaseFormComponentType
 
 async function initComponentAdapter() {
   const components: Partial<Record<ComponentType, Component>> = {
@@ -81,7 +81,7 @@ async function initComponentAdapter() {
           visibleEvent: 'onVisibleChange',
         },
         slots,
-      );
+      )
     },
     ApiTreeSelect: (props, { attrs, slots }) => {
       return h(
@@ -98,35 +98,35 @@ async function initComponentAdapter() {
           visibleEvent: 'onVisibleChange',
         },
         slots,
-      );
+      )
     },
     Checkbox: ElCheckbox,
     CheckboxGroup: (props, { attrs, slots }) => {
-      let defaultSlot;
+      let defaultSlot
       if (Reflect.has(slots, 'default')) {
-        defaultSlot = slots.default;
+        defaultSlot = slots.default
       } else {
-        const { options, isButton } = attrs;
+        const { options, isButton } = attrs
         if (Array.isArray(options)) {
           defaultSlot = () =>
             options.map((option) =>
               h(isButton ? ElCheckboxButton : ElCheckbox, option),
-            );
+            )
         }
       }
       return h(
         ElCheckboxGroup,
         { ...props, ...attrs },
         { ...slots, default: defaultSlot },
-      );
+      )
     },
     // 自定义默认按钮
     DefaultButton: (props, { attrs, slots }) => {
-      return h(ElButton, { ...props, attrs, type: 'info' }, slots);
+      return h(ElButton, { ...props, attrs, type: 'info' }, slots)
     },
     // 自定义主要按钮
     PrimaryButton: (props, { attrs, slots }) => {
-      return h(ElButton, { ...props, attrs, type: 'primary' }, slots);
+      return h(ElButton, { ...props, attrs, type: 'primary' }, slots)
     },
     Divider: ElDivider,
     IconPicker: (props, { attrs, slots }) => {
@@ -140,43 +140,43 @@ async function initComponentAdapter() {
           ...attrs,
         },
         slots,
-      );
+      )
     },
     Input: withDefaultPlaceholder(ElInput, 'input'),
     InputNumber: withDefaultPlaceholder(ElInputNumber, 'input'),
     RadioGroup: (props, { attrs, slots }) => {
-      let defaultSlot;
+      let defaultSlot
       if (Reflect.has(slots, 'default')) {
-        defaultSlot = slots.default;
+        defaultSlot = slots.default
       } else {
-        const { options } = attrs;
+        const { options } = attrs
         if (Array.isArray(options)) {
           defaultSlot = () =>
             options.map((option) =>
               h(attrs.isButton ? ElRadioButton : ElRadio, option),
-            );
+            )
         }
       }
       return h(
         ElRadioGroup,
         { ...props, ...attrs },
         { ...slots, default: defaultSlot },
-      );
+      )
     },
     Select: (props, { attrs, slots }) => {
-      return h(ElSelectV2, { ...props, attrs }, slots);
+      return h(ElSelectV2, { ...props, attrs }, slots)
     },
     Space: ElSpace,
     Switch: ElSwitch,
     TimePicker: (props, { attrs, slots }) => {
-      const { name, id, isRange } = props;
-      const extraProps: Recordable<any> = {};
+      const { name, id, isRange } = props
+      const extraProps: Recordable<any> = {}
       if (isRange) {
         if (name && !Array.isArray(name)) {
-          extraProps.name = [name, `${name}_end`];
+          extraProps.name = [name, `${name}_end`]
         }
         if (id && !Array.isArray(id)) {
-          extraProps.id = [id, `${id}_end`];
+          extraProps.id = [id, `${id}_end`]
         }
       }
       return h(
@@ -187,17 +187,17 @@ async function initComponentAdapter() {
           ...extraProps,
         },
         slots,
-      );
+      )
     },
     DatePicker: (props, { attrs, slots }) => {
-      const { name, id, type } = props;
-      const extraProps: Recordable<any> = {};
+      const { name, id, type } = props
+      const extraProps: Recordable<any> = {}
       if (type && type.includes('range')) {
         if (name && !Array.isArray(name)) {
-          extraProps.name = [name, `${name}_end`];
+          extraProps.name = [name, `${name}_end`]
         }
         if (id && !Array.isArray(id)) {
-          extraProps.id = [id, `${id}_end`];
+          extraProps.id = [id, `${id}_end`]
         }
       }
       return h(
@@ -208,14 +208,14 @@ async function initComponentAdapter() {
           ...extraProps,
         },
         slots,
-      );
+      )
     },
     TreeSelect: withDefaultPlaceholder(ElTreeSelect, 'select'),
     Upload: ElUpload,
-  };
+  }
 
   // 将组件注册到全局共享状态中
-  globalShareState.setComponents(components);
+  globalShareState.setComponents(components)
 
   // 定义全局共享状态中的消息提示
   globalShareState.defineMessage({
@@ -227,9 +227,9 @@ async function initComponentAdapter() {
         position: 'bottom-right',
         duration: 0,
         type: 'success',
-      });
+      })
     },
-  });
+  })
 }
 
-export { initComponentAdapter };
+export { initComponentAdapter }

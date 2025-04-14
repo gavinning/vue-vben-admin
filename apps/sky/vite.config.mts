@@ -1,7 +1,8 @@
 import { defineConfig } from '@vben/vite-config'
+
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig(async () => {
   return {
@@ -13,34 +14,34 @@ export default defineConfig(async () => {
           format: 'esm',
         }),
         AutoImport({
-          include: [
-            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-            /\.vue$/,
-            /\.vue\?vue/, // .vue
-            /\.md$/, // .md
-          ],
           dts: true,
           imports: [
             'vue',
             'vue-router',
             {
-              sky: ['emitter', 'AppEvent'],
-              pinia: ['defineStore', 'createPinia'],
+              '#/api': ['directusItem'],
+              '#/api/base': ['defaultParams'],
+              '#/api/sdk': ['actor', 'actorItem', 'actorItem2'],
+              '#/config': [],
+              '#/exception': ['catchError'],
+              '#/helper': ['ok', 'filterFromArray', 'debug'],
+              '#/store': ['usePayStore', 'useLinkStore'],
+              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy'],
+              '@vben/stores': ['useAccessStore', 'useUserStore'],
               'element-plus': [
                 ['ElMessage', 'Message'],
                 ['ElMessageBox', 'Popover'],
                 ['ElNotification', 'Notice'],
               ],
-              '#/api': ['directusItem'],
-              '#/api/base': ['defaultParams'],
-              '#/api/sdk': ['actor', 'actorItem', 'actorItem2'],
-              '#/store': ['usePayStore', 'useLinkStore'],
-              '#/helper': ['ok', 'filterFromArray', 'debug'],
-              '#/exception': ['catchError'],
-              '#/config': [],
-              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy'],
-              '@vben/stores': ['useAccessStore', 'useUserStore'],
+              pinia: ['defineStore', 'createPinia'],
+              sky: ['emitter', 'AppEvent'],
             },
+          ],
+          include: [
+            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+            /\.vue$/,
+            /\.vue\?vue/, // .vue
+            /\.md$/, // .md
           ],
         }),
       ],

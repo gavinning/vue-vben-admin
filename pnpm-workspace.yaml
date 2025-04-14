@@ -15,8 +15,10 @@ packages:
   - docs
   - playground
 catalog:
+  debug: ^4.4.0
   extend: ^3.0.2
   stylus: ^0.64.0
+  'vue-component-type-helpers': ^2.2.8
   '@types/extend': ^3.0.4
   '@directus/sdk': ^10.3.3
   '@element-plus/icons-vue': ^2.3.1

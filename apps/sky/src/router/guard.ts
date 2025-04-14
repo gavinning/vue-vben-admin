@@ -1,14 +1,14 @@
-import type { Router } from 'vue-router';
+import type { Router } from 'vue-router'
 
-import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@vben/constants';
-import { preferences } from '@vben/preferences';
-import { useAccessStore, useUserStore } from '@vben/stores';
-import { startProgress, stopProgress } from '@vben/utils';
+import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@vben/constants'
+import { preferences } from '@vben/preferences'
+import { useAccessStore, useUserStore } from '@vben/stores'
+import { startProgress, stopProgress } from '@vben/utils'
 
-import { accessRoutes, coreRouteNames } from '#/router/routes';
-import { useAuthStore } from '#/store';
+import { accessRoutes, coreRouteNames } from '#/router/routes'
+import { useAuthStore } from '#/store'
 
-import { generateAccess } from './access';
+import { generateAccess } from './access'
 
 /**
  * 通用守卫配置
@@ -16,28 +16,28 @@ import { generateAccess } from './access';
  */
 function setupCommonGuard(router: Router) {
   // 记录已经加载的页面
-  const loadedPaths = new Set<string>();
+  const loadedPaths = new Set<string>()
 
   router.beforeEach(async (to) => {
-    to.meta.loaded = loadedPaths.has(to.path);
+    to.meta.loaded = loadedPaths.has(to.path)
 
     // 页面加载进度条
     if (!to.meta.loaded && preferences.transition.progress) {
-      startProgress();
+      startProgress()
     }
-    return true;
-  });
+    return true
+  })
 
   router.afterEach((to) => {
     // 记录页面是否加载,如果已经加载，后续的页面切换动画等效果不在重复执行
 
-    loadedPaths.add(to.path);
+    loadedPaths.add(to.path)
 
     // 关闭页面加载进度条
     if (preferences.transition.progress) {
-      stopProgress();
+      stopProgress()
     }
-  });
+  })
 }
 
 /**
@@ -46,9 +46,9 @@ function setupCommonGuard(router: Router) {
  */
 function setupAccessGuard(router: Router) {
   router.beforeEach(async (to, from) => {
-    const accessStore = useAccessStore();
-    const userStore = useUserStore();
-    const authStore = useAuthStore();
+    const accessStore = useAccessStore()
+    const userStore = useUserStore()
+    const authStore = useAuthStore()
 
     // 基本路由，这些路由不需要进入权限拦截
     if (coreRouteNames.includes(to.name as string)) {
@@ -57,16 +57,16 @@ function setupAccessGuard(router: Router) {
           (to.query?.redirect as string) ||
             userStore.userInfo?.homePath ||
             DEFAULT_HOME_PATH,
-        );
+        )
       }
-      return true;
+      return true
     }
 
     // accessToken 检查
     if (!accessStore.accessToken) {
       // 明确声明忽略权限访问权限，则可以访问
       if (to.meta.ignoreAccess) {
-        return true;
+        return true
       }
 
       // 没有访问权限，跳转登录页面
@@ -80,20 +80,20 @@ function setupAccessGuard(router: Router) {
               : { redirect: encodeURIComponent(to.fullPath) },
           // 携带当前跳转的页面，登录后重新跳转该页面
           replace: true,
-        };
+        }
       }
-      return to;
+      return to
     }
 
     // 是否已经生成过动态路由
     if (accessStore.isAccessChecked) {
-      return true;
+      return true
     }
 
     // 生成路由表
     // 当前登录用户拥有的角色标识列表
-    const userInfo = userStore.userInfo || (await authStore.fetchUserInfo());
-    const userRoles = userInfo.roles ?? [];
+    const userInfo = userStore.userInfo || (await authStore.fetchUserInfo())
+    const userRoles = userInfo.roles ?? []
 
     // 生成菜单和路由
     const { accessibleMenus, accessibleRoutes } = await generateAccess({
@@ -101,22 +101,22 @@ function setupAccessGuard(router: Router) {
       router,
       // 则会在菜单中显示，但是访问会被重定向到403
       routes: accessRoutes,
-    });
+    })
 
     // 保存菜单信息和路由信息
-    accessStore.setAccessMenus(accessibleMenus);
-    accessStore.setAccessRoutes(accessibleRoutes);
-    accessStore.setIsAccessChecked(true);
+    accessStore.setAccessMenus(accessibleMenus)
+    accessStore.setAccessRoutes(accessibleRoutes)
+    accessStore.setIsAccessChecked(true)
     const redirectPath = (from.query.redirect ??
       (to.path === DEFAULT_HOME_PATH
         ? userInfo.homePath || DEFAULT_HOME_PATH
-        : to.fullPath)) as string;
+        : to.fullPath)) as string
 
     return {
       ...router.resolve(decodeURIComponent(redirectPath)),
       replace: true,
-    };
-  });
+    }
+  })
 }
 
 /**
@@ -125,9 +125,9 @@ function setupAccessGuard(router: Router) {
  */
 function createRouterGuard(router: Router) {
   /** 通用 */
-  setupCommonGuard(router);
+  setupCommonGuard(router)
   /** 权限访问 */
-  setupAccessGuard(router);
+  setupAccessGuard(router)
 }
 
-export { createRouterGuard };
+export { createRouterGuard }

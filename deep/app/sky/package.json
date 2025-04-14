@@ -2,6 +2,9 @@
   "name": "sky",
   "version": "0.0.1",
   "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "gavinning <gavinning@qq.com>",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,16 +22,13 @@
   "prettier": {
     "semi": false
   },
-  "keywords": [],
-  "author": "gavinning <gavinning@qq.com>",
-  "license": "MIT",
   "dependencies": {
     "@4a/helper": "workspace:*",
-    "@vben/types": "workspace:*",
     "@vben/hooks": "workspace:*",
     "@vben/preferences": "workspace:*",
     "@vben/request": "workspace:*",
     "@vben/stores": "workspace:*",
+    "@vben/types": "workspace:*",
     "element-plus": "catalog:",
     "mitt": "^3.0.1"
   }

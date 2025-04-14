@@ -1,6 +1,6 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
-import { $t } from '#/locales';
+import { $t } from '#/locales'
 
 const routes: RouteRecordRaw[] = import.meta.env.PROD
   ? []
@@ -33,6 +33,6 @@ const routes: RouteRecordRaw[] = import.meta.env.PROD
           },
         ],
       },
-    ];
+    ]
 
-export default routes;
+export default routes

@@ -43,7 +43,7 @@ export const usePayStore = defineStore('payStore', {
         return item
       })
 
-      // console.log(123, body)
+      // console.log(123, form)
 
       return (this.payFormSchema = form)
     },

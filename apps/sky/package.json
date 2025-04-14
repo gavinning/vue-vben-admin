@@ -3,9 +3,6 @@
   "version": "0.1.1",
   "private": true,
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "pnpm vite build --mode production",
     "build:analyze": "pnpm vite build --mode analyze",
@@ -15,6 +12,9 @@
     "zip": "bash sh/pack.sh `npm pack`",
     "push": "bash sh/push.sh"
   },
+  "files": [
+    "dist"
+  ],
   "imports": {
     "#/*": "./src/*"
   },
