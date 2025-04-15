@@ -81,6 +81,14 @@ export const Table = defineComponent<TableProps>({
       }
     }
 
+    const handleReset = () => {
+      formApi.resetForm()
+      // 如果存在编辑行，则重置编辑行
+      if (isEdit.value) {
+        formApi.setValues(editRow.value)
+      }
+    }
+
     // 处理Form表单的提交事件
     // isEdit.value === true 表示是编辑操作
     // isEdit.value === false 表示是创建操作
@@ -104,16 +112,20 @@ export const Table = defineComponent<TableProps>({
       }
     }
 
-    const renderTag = () => ({
-      extra: () => <div>1233</div>,
-      default: () => <Form handleSubmit={onFormSubmit} {...props.formProps} />,
-    })
+    // const renderTag = () => ({
+    //   extra: () => <div>1233</div>,
+    //   default: () => <Form handleSubmit={onFormSubmit} handleReset={handleReset} {...props.formProps} />,
+    // })
 
     return () => (
       <Page>
         <Grid>{{ ...slots, ...renderAction(proxyRenderAction) }}</Grid>
         <Drawer class="w-full max-w-[800px] mx-auto" footer={false}>
-          {renderTag()}
+          <Form
+            handleReset={handleReset}
+            handleSubmit={onFormSubmit}
+            {...props.formProps}
+          />
         </Drawer>
       </Page>
     )

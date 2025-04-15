@@ -49,6 +49,10 @@ export interface RenderAction extends TableAction {
 // 扩展FormSchema
 interface Schema extends VbenFormSchema {
   /**
+   * 当值为数字类型时，用于控制数字输入框的输入范围
+   */
+  range: [number, number]
+  /**
    * 表单组件编辑时渲染配置
    */
   editComponentProps: ComponentProps
