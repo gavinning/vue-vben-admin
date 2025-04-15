@@ -1,3 +1,5 @@
+import { hasIdOnly } from '#/helper'
+
 import { getValidator, ValidatorKey } from './validator_config'
 
 class Table<R extends Item> {
@@ -28,6 +30,7 @@ class Table<R extends Item> {
   }
 
   async update(row: R) {
+    if (hasIdOnly(row)) return
     this.checkValidator()
     this.validator.update?.parse(row)
     return this.api.updateOne(row.id, row)

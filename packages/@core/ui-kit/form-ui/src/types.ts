@@ -129,7 +129,7 @@ export interface FormItemDependencies {
   triggerFields: string[];
 }
 
-type ComponentProps =
+export type ComponentProps =
   | ((
       value: Partial<Record<string, any>>,
       actions: FormActions,

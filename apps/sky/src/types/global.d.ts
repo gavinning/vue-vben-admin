@@ -18,6 +18,14 @@ declare global {
 
 declare global {
   export namespace App {
+    export namespace App {
+      export interface Row {
+        id: ID
+        name: string
+        remote_code: string
+      }
+    }
+
     export namespace Pay {
       export interface Row {
         id?: number

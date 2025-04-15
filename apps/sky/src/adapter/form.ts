@@ -37,4 +37,4 @@ export { useVbenForm, z }
 
 export type VbenFormSchema = FormSchema<ComponentType>
 export type { VbenFormProps }
-export type { FormRenderProps } from '@vben/common-ui'
+export type { ComponentProps, FormRenderProps } from '@vben/common-ui'

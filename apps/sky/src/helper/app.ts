@@ -76,3 +76,7 @@ export function diff<T = any>(src: any, target: any, whiteList?: string[]): T {
   // 返回包含不同属性的新对象
   return obj
 }
+
+export function hasIdOnly(target: any) {
+  return Object.keys(target).length === 1 && target.id
+}

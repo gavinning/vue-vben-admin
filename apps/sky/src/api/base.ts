@@ -14,7 +14,6 @@ const DEFAULT_PARAMS = {
       _eq: '$CURRENT_USER',
     },
   },
-  fields: '*,app.name',
 }
 
 /**

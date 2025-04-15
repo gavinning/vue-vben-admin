@@ -2,6 +2,7 @@ export { setupVbenForm } from './config';
 
 export type {
   BaseFormComponentType,
+  ComponentProps,
   ExtendedFormApi,
   FormRenderProps,
   VbenFormProps,

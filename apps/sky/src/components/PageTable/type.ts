@@ -1,6 +1,11 @@
 import { VxeGridPropTypes } from 'vxe-table'
 
-import { FormRenderProps, VbenFormProps } from '#/adapter/form'
+import {
+  ComponentProps,
+  FormRenderProps,
+  VbenFormProps,
+  VbenFormSchema,
+} from '#/adapter/form'
 import { VxeTableGridOptions } from '#/adapter/vxe-table'
 
 interface ActionQueryBody {
@@ -41,6 +46,22 @@ export interface RenderAction extends TableAction {
   create?: AnyFunction
 }
 
+// 扩展FormSchema
+interface Schema extends VbenFormSchema {
+  /**
+   * 表单组件编辑时渲染配置
+   */
+  editComponentProps: ComponentProps
+  /**
+   * 表单组件创建时渲染配置
+   */
+  createComponentProps: ComponentProps
+}
+
+export interface FormSchema extends FormRenderProps {
+  schema?: Schema[]
+}
+
 export interface TableProps {
   /**
    * 表格列配置
@@ -74,5 +95,26 @@ export interface TableProps {
    * 表单渲染配置，服务器传递的schema对应此类型
    * 参考：https://doc.vben.pro/components/common-ui/vben-form.html
    */
-  formRenderSchema?: FormRenderProps
+  formRenderSchema?: FormSchema
+}
+
+// PageTable Hooks
+export type PageTableHook<T extends Item = Item> = (
+  schema: FormSchema,
+  row?: Readonly<T>,
+) => Promise<FormSchema>
+
+export interface PageTableHooks {
+  /**
+   * 通用表单渲染钩子，在所有场景都会触发
+   */
+  hook?: PageTableHook
+  /**
+   * 新增表单渲染钩子
+   */
+  create?: PageTableHook
+  /**
+   * 编辑表单渲染钩子
+   */
+  update?: PageTableHook
 }

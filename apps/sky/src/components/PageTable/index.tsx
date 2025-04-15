@@ -23,6 +23,8 @@ export const Table = defineComponent<TableProps>({
     'formRenderSchema',
   ],
   setup(props, { slots }) {
+    const store = usePageTableStore()
+
     const [Grid, gridApi] = defineGrid(props)
     const [Form, formApi] = useVbenForm(props.formRenderSchema ?? {})
     const [Drawer, drawerApi] = useVbenDrawer()
@@ -41,8 +43,9 @@ export const Table = defineComponent<TableProps>({
     }
 
     if (action.create) {
-      proxyRenderAction.create = () => {
+      proxyRenderAction.create = async () => {
         isEdit.value = false
+        await store.beforeCreate()
         drawerApi.open()
       }
     }
@@ -51,7 +54,12 @@ export const Table = defineComponent<TableProps>({
       proxyRenderAction.update = async (row: Item) => {
         isEdit.value = true
         editRow.value = row
-        formApi.setValues(row)
+        const copyRow = merge(true, {}, row)
+        // 不允许对copyRow进行修改，非响应式数据，修改无意义
+        // 表单提交的时候会用到diff对比数据，所以不能开放对row的修改
+        // 如果开放对row的修改，可能会影响到实际的数据修改
+        await store.beforeEdit(Object.freeze(copyRow))
+        formApi.setValues(copyRow)
         drawerApi.open()
       }
     }
@@ -96,11 +104,16 @@ export const Table = defineComponent<TableProps>({
       }
     }
 
+    const renderTag = () => ({
+      extra: () => <div>1233</div>,
+      default: () => <Form handleSubmit={onFormSubmit} {...props.formProps} />,
+    })
+
     return () => (
       <Page>
         <Grid>{{ ...slots, ...renderAction(proxyRenderAction) }}</Grid>
         <Drawer class="w-full max-w-[800px] mx-auto" footer={false}>
-          <Form handleSubmit={onFormSubmit} {...props.formProps} />
+          {renderTag()}
         </Drawer>
       </Page>
     )
