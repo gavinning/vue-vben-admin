@@ -29,15 +29,15 @@ export interface TableAction {
    */
   query: ActionQuery
   /**
-   * 新增row
+   * 新增row，用户提交创建表单时会调用此方法
    */
   create?: (row: Item) => Promise<any>
   /**
-   * 更新row
+   * 更新row，用户提交编辑表单时会调用此方法
    */
   update?: (row: Item) => Promise<any>
   /**
-   * 删除row
+   * 删除row，用户确定提交删除时会调用此方法
    */
   remove?: (row: Item) => Promise<any>
 }

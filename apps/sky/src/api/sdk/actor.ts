@@ -1,6 +1,8 @@
 import { Directus } from '@directus/sdk'
 
-export const actor = new Directus(import.meta.env.VITE_GLOB_API_URL, {
+import { getHost } from '#/config/host'
+
+export const actor = new Directus(getHost(), {
   auth: {
     mode: 'cookie',
     msRefreshBeforeExpires: 1000 * 60 * 60 * 24,

@@ -19,14 +19,13 @@ export default defineConfig(async () => {
             'vue',
             'vue-router',
             {
-              '#/api': ['directusItem'],
-              '#/api/base': ['defaultParams'],
+              '#/api': ['directusItem', 'defaultParams'],
               '#/api/sdk': ['actor', 'actorItem', 'actorItem2'],
               '#/config': [],
               '#/exception': ['catchError'],
               '#/helper': ['ok', 'filterFromArray', 'debug'],
               '#/store': ['usePayStore', 'useLinkStore', 'usePageTableStore'],
-              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy'],
+              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy', 'removeNull'],
               '@vben/stores': ['useAccessStore', 'useUserStore'],
               'element-plus': [
                 ['ElMessage', 'Message'],

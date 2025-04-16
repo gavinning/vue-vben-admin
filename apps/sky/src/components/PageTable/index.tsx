@@ -1,12 +1,10 @@
-import type { RenderAction, TableProps } from './type'
-
-import { useVbenDrawer } from '@vben/common-ui'
-
 import { useVbenForm } from '#/adapter/form'
 import { Page } from '#/components/Page'
+import { useDrawer } from '#/components/uses/drawer'
 import { diff } from '#/helper'
 
 import { defineGrid, renderAction } from './helper'
+import { RenderAction, TableProps } from './type'
 
 export { formatCUD, getEasyAction } from './helper'
 export * from './type'
@@ -27,25 +25,40 @@ export const Table = defineComponent<TableProps>({
 
     const [Grid, gridApi] = defineGrid(props)
     const [Form, formApi] = useVbenForm(props.formRenderSchema ?? {})
-    const [Drawer, drawerApi] = useVbenDrawer()
+    const { Drawer, drawerApi } = useDrawer()
 
+    // 处理实际的crud操作
     const action = props.action
     const isEdit = ref(false)
     const editRow = ref<any>(null)
 
-    // 用于处理Drawer的操作
+    // 用于判断表单是否被修改
+    // 根据状态决定是否在关闭Drawer的时候提醒用户
+    const isFormChanged = ref(false)
+
+    // Drawer的标题
+    const title = computed(() => {
+      return isEdit.value ? '编辑' : '新增'
+    })
+
+    // 用于处理表格中crud按钮的操作
     const proxyRenderAction: RenderAction = {
       query: action.query,
-      // 下面的功能，根据action值决定是否启用
+      // 下面的功能，根据其值决定是否启用
+      // 例如传递了create方法，则启用create功能，反之不启用
       create: undefined as TableProps['action']['create'],
       update: undefined as TableProps['action']['update'],
       remove: undefined as TableProps['action']['remove'],
     }
 
     if (action.create) {
+      // 外部传递了create方法，则启用create功能
+      // proxyRenderAction.create用于响应新增按钮的事件
+      // 当新增表单提交的时候，会调用action.create方法
       proxyRenderAction.create = async () => {
         isEdit.value = false
         await store.beforeCreate()
+        handleReset()
         drawerApi.open()
       }
     }
@@ -59,7 +72,7 @@ export const Table = defineComponent<TableProps>({
         // 表单提交的时候会用到diff对比数据，所以不能开放对row的修改
         // 如果开放对row的修改，可能会影响到实际的数据修改
         await store.beforeEdit(Object.freeze(copyRow))
-        formApi.setValues(copyRow)
+        handleReset()
         drawerApi.open()
       }
     }
@@ -81,19 +94,40 @@ export const Table = defineComponent<TableProps>({
       }
     }
 
-    const handleReset = () => {
-      formApi.resetForm()
+    // 处理Drawer的确认事件
+    function onDrawerConfirm() {
+      // 验证并提交表单
+      formApi.validateAndSubmitForm()
+    }
+
+    async function handleReset() {
+      await formApi.resetForm()
       // 如果存在编辑行，则重置编辑行
       if (isEdit.value) {
-        formApi.setValues(editRow.value)
+        await formApi.setValues(editRow.value)
+      }
+      isFormChanged.value = false
+    }
+
+    // 处理Form表单的值变化事件
+    // 当值改的时候，isFormChanged.value = true
+    // 当值重置的时候，isFormChanged.value = false
+    // isFormChanged的值会控制当Drawer关闭的时候，是否需要确认
+    function handleValuesChange(values: Item) {
+      if (isEdit.value === false) {
+        isFormChanged.value = Object.keys(removeNull(values)).length > 0
+      } else {
+        const changes = diff(editRow.value, values)
+        isFormChanged.value = Object.keys(changes).length > 0
       }
     }
 
     // 处理Form表单的提交事件
     // isEdit.value === true 表示是编辑操作
     // isEdit.value === false 表示是创建操作
-    const onFormSubmit = async (values: Item) => {
+    async function onFormSubmit(values: Item) {
       try {
+        drawerApi.loading()
         if (isEdit.value) {
           const id = editRow.value?.id
           const changes = merge({ id }, diff(editRow.value, values))
@@ -106,24 +140,26 @@ export const Table = defineComponent<TableProps>({
 
         // 表单提交则关闭Drawer
         drawerApi.close()
+        drawerApi.loadingEnd()
         Message.success(isEdit.value ? '更新成功' : '创建成功')
       } catch (error) {
+        drawerApi.loadingEnd()
         catchError(error)
       }
     }
 
-    // const renderTag = () => ({
-    //   extra: () => <div>1233</div>,
-    //   default: () => <Form handleSubmit={onFormSubmit} handleReset={handleReset} {...props.formProps} />,
-    // })
-
     return () => (
       <Page>
         <Grid>{{ ...slots, ...renderAction(proxyRenderAction) }}</Grid>
-        <Drawer class="w-full max-w-[800px] mx-auto" footer={false}>
+        <Drawer
+          closeConfirm={isFormChanged.value}
+          onConfirm={onDrawerConfirm}
+          title={title.value}
+        >
           <Form
             handleReset={handleReset}
             handleSubmit={onFormSubmit}
+            handleValuesChange={handleValuesChange}
             {...props.formProps}
           />
         </Drawer>

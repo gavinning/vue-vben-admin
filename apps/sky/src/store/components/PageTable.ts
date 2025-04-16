@@ -120,7 +120,6 @@ export const usePageTableStore = defineStore('PageTableStore', {
     async getFormSchemaRequest() {
       const data = await this.api.getOne(
         filter({ key: this.name, name: 'FormSchema' }),
-        { withCredentials: false },
       )
 
       const cud = data?.map?.cud || ''

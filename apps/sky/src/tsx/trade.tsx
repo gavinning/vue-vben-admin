@@ -3,7 +3,7 @@ import { ElTag } from 'element-plus'
 const Tag = (row: App.Trade.Row) => {
   const getText = filterFromArray(['有效', '无效'])
   const getType = filterFromArray(['success', 'info'])
-  const isSuccess = row.status === 2
+  const isSuccess = row.status === 2 ? 0 : 1
   return <ElTag type={getType(isSuccess) as any}>{getText(isSuccess)}</ElTag>
 }
 

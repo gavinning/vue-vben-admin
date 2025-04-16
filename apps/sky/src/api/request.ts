@@ -3,7 +3,7 @@
  */
 import type { RequestClientOptions } from '@vben/request'
 
-import { useAppConfig } from '@vben/hooks'
+// import { useAppConfig } from '@vben/hooks'
 import { preferences } from '@vben/preferences'
 import {
   authenticateResponseInterceptor,
@@ -15,11 +15,13 @@ import { useAccessStore } from '@vben/stores'
 
 import { ElNotification } from 'element-plus'
 
+import { getHost } from '#/config/host'
 import { useAuthStore } from '#/store'
 
 import { refreshTokenApi } from './core'
 
-const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD)
+// const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD)
+const apiURL = getHost()
 
 function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   const client = new RequestClient({

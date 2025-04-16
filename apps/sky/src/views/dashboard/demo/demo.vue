@@ -1,9 +1,21 @@
 <script lang="ts" setup>
+import { ElButton as Button } from 'element-plus'
+
 import Drawer from '#/components/Drawer.vue'
+import { useDemo } from '#/components/useDemo'
 
 import DrawerForm from './DrawerForm.vue'
 
-const showDrawer = ref(true)
+const { Demo, changeText } = useDemo()
+
+const aaa = ref('aaaa')
+
+const bbb = () => {
+  aaa.value = `bbbb${Math.random()}`
+  changeText()
+}
+
+const showDrawer = ref(false)
 
 const defaultForm: any = {
   name: '',
@@ -33,6 +45,8 @@ function close(fn: AnyFunction) {
 <template>
   <div>
     <div class="p-5">测试抽屉</div>
+    <Demo :prefix="aaa" />
+    <Button @click="bbb">打开抽屉</Button>
     <Drawer
       title="测试抽屉"
       v-model="showDrawer"
