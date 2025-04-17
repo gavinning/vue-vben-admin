@@ -1,5 +1,4 @@
 import { useVbenForm } from '#/adapter/form'
-import { Page } from '#/components/Page'
 import { useDrawer } from '#/components/uses/drawer'
 import { diff } from '#/helper'
 
@@ -149,7 +148,7 @@ export const Table = defineComponent<TableProps>({
     }
 
     return () => (
-      <Page>
+      <div class="app-mod-page_table">
         <Grid>{{ ...slots, ...renderAction(proxyRenderAction) }}</Grid>
         <Drawer
           closeConfirm={isFormChanged.value}
@@ -160,10 +159,11 @@ export const Table = defineComponent<TableProps>({
             handleReset={handleReset}
             handleSubmit={onFormSubmit}
             handleValuesChange={handleValuesChange}
+            showDefaultActions={false}
             {...props.formProps}
           />
         </Drawer>
-      </Page>
+      </div>
     )
   },
 })
