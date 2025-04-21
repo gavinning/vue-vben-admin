@@ -8,6 +8,8 @@ import { elementLocale } from '#/locales'
 defineOptions({ name: 'App' })
 
 useElementPlusDesignTokens()
+
+useAppStore().init()
 </script>
 
 <template>

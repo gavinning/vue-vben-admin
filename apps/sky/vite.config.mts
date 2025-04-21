@@ -1,5 +1,4 @@
 import { defineConfig } from '@vben/vite-config'
-
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
@@ -23,8 +22,8 @@ export default defineConfig(async () => {
               '#/api/sdk': ['actor', 'actorItem', 'actorItem2'],
               '#/config': [],
               '#/exception': ['catchError'],
-              '#/helper': ['ok', 'filterFromArray', 'debug'],
-              '#/store': ['usePayStore', 'useLinkStore', 'usePageTableStore'],
+              '#/helper': ['ok', 'filterFromArray', 'debug', 'emitter', 'AppEvent'],
+              '#/store': ['useAppStore', 'usePayStore', 'useLinkStore', 'usePageTableStore'],
               '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy', 'removeNull'],
               '@vben/stores': ['useAccessStore', 'useUserStore'],
               'element-plus': [
@@ -33,7 +32,6 @@ export default defineConfig(async () => {
                 ['ElNotification', 'Notice'],
               ],
               pinia: ['defineStore', 'createPinia'],
-              sky: ['emitter', 'AppEvent'],
             },
           ],
           include: [

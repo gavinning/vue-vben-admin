@@ -39,6 +39,15 @@ const routes: RouteRecordRaw[] = [
           title: '链接',
         },
       },
+      {
+        name: 'Charts',
+        path: '/charts',
+        component: () => import('#/views/dashboard/charts'),
+        meta: {
+          icon: 'carbon:analytics',
+          title: '趋势',
+        },
+      },
     ],
   },
 ]

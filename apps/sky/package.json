@@ -45,10 +45,12 @@
     "element-plus": "catalog:",
     "es-toolkit": "^1.32.0",
     "extend": "catalog:",
+    "mitt": "^3.0.1",
     "pinia": "catalog:",
     "sky": "workspace:*",
     "vue": "catalog:",
     "vue-router": "catalog:",
+    "wujie-vue3": "^1.0.28",
     "zod": "catalog:"
   },
   "devDependencies": {
