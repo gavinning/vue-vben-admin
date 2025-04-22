@@ -7,7 +7,7 @@ export default defineComponent({
   setup() {
     const app = useAppStore()
 
-    const uri = ref(getChartsHost())
+    const uri = ref(getChartsHost('/trend'))
 
     return () => (
       <Page class="p-5" style="background: var(--el-bg-color);">

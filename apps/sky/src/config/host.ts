@@ -15,21 +15,21 @@ export const getHost = () => {
 }
 
 // 图表服务地址
-export const getChartsHost = () => {
+export const getChartsHost = (path: string = '') => {
   const env = localStorage.getItem('DEBUG_HOST')
 
   if (env === 'dev') {
-    return pkgChartsHost('http://localhost:5173')
+    return pkgChartsHost(`http://localhost:5173${path}`)
   }
   if (env === 'prod') {
-    return pkgChartsHost('https://charts.wsd80.top')
+    return pkgChartsHost(`https://charts.wsd80.top${path}`)
   }
   if (env) {
     return pkgChartsHost(env)
   }
 
   const url = useAppConfig(import.meta.env, import.meta.env.PROD).chartURL
-  return pkgChartsHost(url)
+  return pkgChartsHost(url + path)
 }
 
 // 向图表地址添加 token

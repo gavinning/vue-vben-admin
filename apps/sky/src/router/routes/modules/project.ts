@@ -34,4 +34,4 @@ const routes: RouteRecordRaw[] = [
   },
 ]
 
-export default routes
+export default import.meta.env.DEV ? routes : []

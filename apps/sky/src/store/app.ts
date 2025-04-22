@@ -2,9 +2,14 @@ import { usePreferences } from '@vben/preferences'
 
 import wujie from 'wujie-vue3'
 
+import { getHost } from '#/config'
+
 export const useAppStore = defineStore('appStore', {
   state: () => ({
     charts: {
+      env: {
+        apiURL: getHost(),
+      },
       theme: {
         isDark: false,
       },
