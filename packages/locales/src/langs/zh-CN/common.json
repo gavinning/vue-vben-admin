@@ -16,5 +16,9 @@
   "disabled": "已禁用",
   "edit": "修改",
   "delete": "删除",
-  "create": "新增"
+  "create": "新增",
+  "yes": "是",
+  "no": "否",
+  "showSearchPanel": "显示搜索面板",
+  "hideSearchPanel": "隐藏搜索面板"
 }

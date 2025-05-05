@@ -5,10 +5,10 @@ import { h } from 'vue';
 import { IconifyIcon } from '@vben/icons';
 import { $te } from '@vben/locales';
 import { setupVbenVxeTable, useVbenVxeGrid } from '@vben/plugins/vxe-table';
-import { isFunction, isString } from '@vben/utils';
+import { get, isFunction, isString } from '@vben/utils';
 
 import { objectOmit } from '@vueuse/core';
-import { Button, Image, Popconfirm, Tag } from 'ant-design-vue';
+import { Button, Image, Popconfirm, Switch, Tag } from 'ant-design-vue';
 
 import { $t } from '#/locales';
 
@@ -77,8 +77,8 @@ setupVbenVxeTable({
     // 单元格渲染： Tag
     vxeUI.renderer.add('CellTag', {
       renderTableDefault({ options, props }, { column, row }) {
-        const value = row[column.field];
-        const tagOptions = options || [
+        const value = get(row, column.field);
+        const tagOptions = options ?? [
           { color: 'success', label: $t('common.enabled'), value: 1 },
           { color: 'error', label: $t('common.disabled'), value: 0 },
         ];
@@ -87,10 +87,38 @@ setupVbenVxeTable({
           Tag,
           {
             ...props,
-            ...objectOmit(tagItem, ['label']),
+            ...objectOmit(tagItem ?? {}, ['label']),
           },
           { default: () => tagItem?.label ?? value },
         );
+      },
+    });
+
+    vxeUI.renderer.add('CellSwitch', {
+      renderTableDefault({ attrs, props }, { column, row }) {
+        const loadingKey = `__loading_${column.field}`;
+        const finallyProps = {
+          checkedChildren: $t('common.enabled'),
+          checkedValue: 1,
+          unCheckedChildren: $t('common.disabled'),
+          unCheckedValue: 0,
+          ...props,
+          checked: row[column.field],
+          loading: row[loadingKey] ?? false,
+          'onUpdate:checked': onChange,
+        };
+        async function onChange(newVal: any) {
+          row[loadingKey] = true;
+          try {
+            const result = await attrs?.beforeChange?.(newVal, row);
+            if (result !== false) {
+              row[column.field] = newVal;
+            }
+          } finally {
+            row[loadingKey] = false;
+          }
+        }
+        return h(Switch, finallyProps);
       },
     });
 
@@ -183,6 +211,14 @@ setupVbenVxeTable({
           return h(
             Popconfirm,
             {
+              getPopupContainer(el) {
+                return (
+                  el
+                    .closest('.vxe-table--viewport-wrapper')
+                    ?.querySelector('.vxe-table--main-wrapper')
+                    ?.querySelector('tbody') || document.body
+                );
+              },
               placement: 'topLeft',
               title: $t('ui.actionTitle.delete', [attrs?.nameTitle || '']),
               ...props,
