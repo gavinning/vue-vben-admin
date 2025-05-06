@@ -21,13 +21,17 @@ export async function initStores(app: App, options: InitStoreOptions) {
   const { createPersistedState } = await import('pinia-plugin-persistedstate');
   pinia = createPinia();
   const { namespace } = options;
-  const ls = new SecureLS({
-    encodingType: 'aes',
-    encryptionSecret: import.meta.env.VITE_APP_STORE_SECURE_KEY,
-    isCompression: true,
-    // @ts-ignore secure-ls does not have a type definition for this
-    metaKey: `${namespace}-secure-meta`,
-  });
+
+  // @ts-ignore secure-ls does not have a type definition for this
+  const ls = new (typeof SecureLS === 'function' ? SecureLS : SecureLS.default)(
+    {
+      encodingType: 'aes',
+      encryptionSecret: import.meta.env.VITE_APP_STORE_SECURE_KEY,
+      isCompression: true,
+      // @ts-ignore secure-ls does not have a type definition for this
+      metaKey: `${namespace}-secure-meta`,
+    },
+  );
   pinia.use(
     createPersistedState({
       // key $appName-$store.id
