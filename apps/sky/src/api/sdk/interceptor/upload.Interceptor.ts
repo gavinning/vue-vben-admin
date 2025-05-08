@@ -13,9 +13,9 @@ export const uploadInterceptor = (config: Set<string>): Middleware<Context> => {
   return async (ctx) => {
     try {
       const keys = config.values()
-      for(const key of keys) {
+      for (const key of keys) {
         const obj = ctx.data[key]
-  
+
         if (obj) {
           if (isSourceFile(obj)) {
             // console.log(1233, key, obj)
@@ -30,8 +30,7 @@ export const uploadInterceptor = (config: Set<string>): Middleware<Context> => {
       }
 
       return ctx
-    }
-    catch(err) {
+    } catch (err) {
       debug.error('图片上传失败:', err)
       Notice.error('图片上传失败，请重试')
     }

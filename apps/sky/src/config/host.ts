@@ -44,8 +44,6 @@ function pkgChartsHost(url: string) {
   return `${url}?access_token=${access.accessToken}`
 }
 
-
-
 export function encodeImg(uuid: string) {
   return [getHost(), '/assets/', uuid].join('')
 }

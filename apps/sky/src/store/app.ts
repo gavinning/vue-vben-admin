@@ -51,6 +51,6 @@ export const useAppStore = defineStore('appStore', {
         this.fileFieldMap[name] = new Set([])
       }
       return this.fileFieldMap[name]
-    }
+    },
   },
 })

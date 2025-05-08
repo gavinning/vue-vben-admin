@@ -43,17 +43,22 @@ export const usePageTableStore = defineStore('PageTableStore', {
     currentUploadSchemas: (state) => {
       const formSchema = state.schema[state.name]
       if (!formSchema) return []
-      return formSchema.schema?.filter(item => item.component === 'Upload') ?? []
-    }
+      return (
+        formSchema.schema?.filter((item) => item.component === 'Upload') ?? []
+      )
+    },
   },
 
   actions: {
     // 修正限制单条上传图片的组件数据结构，不使用数组 [file] => file
     fixUploadComponentsDataStructure(values: Item) {
-      this.currentUploadSchemas.map(item => {
+      this.currentUploadSchemas.map((item) => {
         if (item.fieldName in values) {
           // 单条数据
-          if (!item.componentProps?.multiple || item.componentProps?.limit === 1) {
+          if (
+            !item.componentProps?.multiple ||
+            item.componentProps?.limit === 1
+          ) {
             values[item.fieldName] = values[item.fieldName][0]
           }
         }
@@ -64,15 +69,14 @@ export const usePageTableStore = defineStore('PageTableStore', {
     // 表单渲染之前对图片进行编码
     encodeImg(row: Item) {
       const encodeFile = (id: string) => ({ url: encodeImg(id) })
-      this.currentUploadSchemas.map(item => {
+      this.currentUploadSchemas.map((item) => {
         if (item.fieldName in row) {
           const key = item.fieldName
           const value = row[key]
           if (isLikeUUID(value)) {
             row[key] = [encodeFile(value)]
-          }
-          else if (Array.isArray(value)) {
-            row[key] = value.map(value => {
+          } else if (Array.isArray(value)) {
+            row[key] = value.map((value) => {
               return isLikeUUID(value) ? encodeFile(value) : value
             })
           }
@@ -81,9 +85,7 @@ export const usePageTableStore = defineStore('PageTableStore', {
       return row
     },
 
-    decodeImg(row: Item) {
-      
-    },
+    decodeImg(row: Item) {},
 
     /**
      * 用于动态修改表单
