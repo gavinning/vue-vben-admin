@@ -103,7 +103,8 @@ export const Table = defineComponent<TableProps>({
       await formApi.resetForm()
       // 如果存在编辑行，则重置编辑行
       if (isEdit.value) {
-        await formApi.setValues(editRow.value)
+        const row = store.encodeImg(editRow.value)
+        await formApi.setValues(row)
       }
       isFormChanged.value = false
     }
@@ -127,6 +128,7 @@ export const Table = defineComponent<TableProps>({
     async function onFormSubmit(values: Item) {
       try {
         drawerApi.loading()
+        values = store.fixUploadComponentsDataStructure(values)
         if (isEdit.value) {
           const id = editRow.value?.id
           const changes = merge({ id }, diff(editRow.value, values))

@@ -22,6 +22,7 @@
     "semi": false
   },
   "dependencies": {
+    "tap": "workspace:*",
     "@4a/helper": "workspace:*",
     "@directus/sdk": "catalog:",
     "@element-plus/icons-vue": "catalog:",

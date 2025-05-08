@@ -1,9 +1,13 @@
 import { filter } from '#/api'
 import {
+  Schema,
   FormSchema,
   PageTableHook,
   PageTableHooks,
 } from '#/components/PageTable'
+
+import { isLikeUUID } from '#/helper'
+import { encodeImg, decodeImg } from '#/config'
 
 // 处理表的增删改查 For PageTable
 // 详见 #/components/PageTable/PageTable.tsx
@@ -34,9 +38,53 @@ export const usePageTableStore = defineStore('PageTableStore', {
     currentHook: (state) => state.hook[state.name] || ({} as PageTableHooks),
     currentSchema: (state) => state.schema[state.name] || ({} as FormSchema),
     currentColumns: (state) => state.column[state.name] || ([] as any[]),
+
+    // 获取当前表单的Upload组件
+    currentUploadSchemas: (state) => {
+      const formSchema = state.schema[state.name]
+      if (!formSchema) return []
+      return formSchema.schema?.filter(item => item.component === 'Upload') ?? []
+    }
   },
 
   actions: {
+    // 修正限制单条上传图片的组件数据结构，不使用数组 [file] => file
+    fixUploadComponentsDataStructure(values: Item) {
+      this.currentUploadSchemas.map(item => {
+        if (item.fieldName in values) {
+          // 单条数据
+          if (!item.componentProps?.multiple || item.componentProps?.limit === 1) {
+            values[item.fieldName] = values[item.fieldName][0]
+          }
+        }
+      })
+      return values
+    },
+
+    // 表单渲染之前对图片进行编码
+    encodeImg(row: Item) {
+      const encodeFile = (id: string) => ({ url: encodeImg(id) })
+      this.currentUploadSchemas.map(item => {
+        if (item.fieldName in row) {
+          const key = item.fieldName
+          const value = row[key]
+          if (isLikeUUID(value)) {
+            row[key] = [encodeFile(value)]
+          }
+          else if (Array.isArray(value)) {
+            row[key] = value.map(value => {
+              return isLikeUUID(value) ? encodeFile(value) : value
+            })
+          }
+        }
+      })
+      return row
+    },
+
+    decodeImg(row: Item) {
+      
+    },
+
     /**
      * 用于动态修改表单
      * 在表单组件渲染前执行
@@ -115,6 +163,27 @@ export const usePageTableStore = defineStore('PageTableStore', {
         : this.getFormSchemaRequest()
     },
 
+    // 对FormSchema做出一定预处理
+    precoding(schema: Schema[]): Schema[] {
+      if (!schema) return []
+
+      const app = useAppStore()
+
+      // Schema预处理
+      schema = schema.map((item) => {
+        // 默认为Input
+        if (!item.component) item.component = 'Input'
+
+        // 如果是上传组件，添加文件字段映射
+        if (item.component === 'Upload') {
+          app.addFileFieldMap(this.name, item.fieldName)
+        }
+        return item
+      })
+
+      return schema
+    },
+
     // 外部应该调用getFormSchema方法
     // 从服务器获取创建和编辑的表单Schema
     async getFormSchemaRequest() {
@@ -126,11 +195,7 @@ export const usePageTableStore = defineStore('PageTableStore', {
       const form = (data?.map?.form as any) || {}
       const columns = (data?.map?.columns as any[]) || []
 
-      // 默认为Input
-      form.schema = form.schema?.map((item) => {
-        if (!item.component) item.component = 'Input'
-        return item
-      })
+      form.schema = this.precoding(form.schema)
 
       this.cud[this.name] = cud
       this.schema[this.name] = form

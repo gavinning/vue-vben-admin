@@ -29,6 +29,10 @@
       "path": "deep/helper",
     },
     {
+      "name": "tap",
+      "path": "deep/tap",
+    },
+    {
       "name": "@vben/docs",
       "path": "docs",
     },

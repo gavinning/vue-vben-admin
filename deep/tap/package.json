@@ -1,0 +1,15 @@
+{
+  "name": "tap",
+  "main": "src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/koa-compose": "^3.2.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "koa-compose": "^4.1.0"
+  }
+}

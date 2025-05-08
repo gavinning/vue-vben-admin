@@ -15,11 +15,9 @@ export const getHost = () => {
 }
 
 export const uploadURL = () => {
-  return [
-    getHost(),
-    '/files?access_token=',
-    useAccessStore().accessToken
-  ].join('')
+  return [getHost(), '/files?access_token=', useAccessStore().accessToken].join(
+    '',
+  )
 }
 
 // 图表服务地址
@@ -44,4 +42,14 @@ export const getChartsHost = (path: string = '') => {
 function pkgChartsHost(url: string) {
   const access = useAccessStore()
   return `${url}?access_token=${access.accessToken}`
+}
+
+
+
+export function encodeImg(uuid: string) {
+  return [getHost(), '/assets/', uuid].join('')
+}
+
+export function decodeImg(url: string) {
+  return new URL(url).pathname.replace('/assets/', '')
 }
