@@ -30,6 +30,7 @@ export default defineConfig(async () => {
                 ['ElMessage', 'Message'],
                 ['ElMessageBox', 'Popover'],
                 ['ElNotification', 'Notice'],
+                ['ElLoading', 'Loading'],
               ],
               pinia: ['defineStore', 'createPinia'],
             },

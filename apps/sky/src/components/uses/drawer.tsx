@@ -43,19 +43,23 @@ export interface DrawerProps {
 export const useDrawer = () => {
   const visible = ref(false)
   const loading = ref(false)
+  const container = useTemplateRef<HTMLElement>('drawer-container')
 
   const drawerApi = {
-    open: () => {
+    open() {
       visible.value = true
     },
-    close: () => {
+    close() {
       visible.value = false
     },
-    loading: () => {
+    loading() {
       loading.value = true
     },
-    loadingEnd: () => {
+    loadingEnd() {
       loading.value = false
+    },
+    getContainer() {
+      return container
     },
   }
 
@@ -116,6 +120,7 @@ export const useDrawer = () => {
         <ElDrawer
           append-to-body
           class="w-full max-w-[800px] mx-auto"
+          ref="drawer-container"
           show-close={false}
           size="100%"
           v-model={visible.value}

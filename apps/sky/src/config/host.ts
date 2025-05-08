@@ -14,6 +14,14 @@ export const getHost = () => {
   return useAppConfig(import.meta.env, import.meta.env.PROD).apiURL
 }
 
+export const uploadURL = () => {
+  return [
+    getHost(),
+    '/files?access_token=',
+    useAccessStore().accessToken
+  ].join('')
+}
+
 // 图表服务地址
 export const getChartsHost = (path: string = '') => {
   const env = localStorage.getItem('DEBUG_HOST')

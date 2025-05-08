@@ -244,7 +244,7 @@ export interface FormSchema<
   /** 组件 */
   component: Component | T;
   /** 组件参数 */
-  componentProps?: ComponentProps;
+  componentProps?: ComponentProps & Record<string, any>;
   /** 默认值 */
   defaultValue?: any;
   /** 依赖 */
