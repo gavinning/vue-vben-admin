@@ -10,6 +10,7 @@ packages:
   - packages/@core/*
   - packages/effects/*
   - packages/business/*
+  - packages/plugins/*
   - apps/*
   - scripts/*
   - docs

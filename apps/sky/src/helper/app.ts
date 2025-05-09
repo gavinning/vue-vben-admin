@@ -65,8 +65,10 @@ export function diff<T = any>(src: any, target: any, whiteList?: string[]): T {
 
   // 遍历目标对象的每个键
   Object.keys(target).forEach((key) => {
+    if (whiteList?.includes(key)) return
+
     // 如果键不在白名单中，并且其值与源对象中对应的值相同
-    if (!whiteList?.includes(key) && obj[key] === src[key]) {
+    if (deepEqual(obj[key], src[key])) {
       // 删除该键
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete obj[key]
@@ -79,4 +81,9 @@ export function diff<T = any>(src: any, target: any, whiteList?: string[]): T {
 
 export function hasIdOnly(target: any) {
   return Object.keys(target).length === 1 && target.id
+}
+
+// 深度比较两个对象是否相等
+export function deepEqual(a: any, b: any) {
+  return JSON.stringify(a) === JSON.stringify(b)
 }

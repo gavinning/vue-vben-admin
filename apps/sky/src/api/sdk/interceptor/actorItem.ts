@@ -1,11 +1,12 @@
 import { Tap } from 'tap'
+
 import { uploadInterceptor } from './upload.Interceptor'
 
 // Intercept for actorItem
 
 function transform(config: Set<string>) {
   return (data: Item) => {
-    return Tap.create({ data }).use(uploadInterceptor(config)).dest()
+    return Tap.create(data).use(uploadInterceptor(config)).dest()
   }
 }
 

@@ -2,6 +2,7 @@ import { defineConfig } from '@vben/vite-config'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
+import createIndex from 'vite-plugin-index'
 
 export default defineConfig(async () => {
   return {
@@ -22,7 +23,7 @@ export default defineConfig(async () => {
               '#/api/sdk': ['actor', 'actorItem', 'actorItem2'],
               '#/config': [],
               '#/exception': ['catchError'],
-              '#/helper': ['ok', 'filterFromArray', 'debug', 'emitter', 'AppEvent'],
+              '#/helper': ['ok', 'diff', 'filterFromArray', 'debug', 'emitter', 'AppEvent'],
               '#/store': ['useAppStore', 'usePayStore', 'useLinkStore', 'usePageTableStore'],
               '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy', 'removeNull'],
               '@vben/stores': ['useAccessStore', 'useUserStore'],
@@ -32,6 +33,8 @@ export default defineConfig(async () => {
                 ['ElNotification', 'Notice'],
                 ['ElLoading', 'Loading'],
               ],
+              '#/models': ['FileImage'],
+              'es-toolkit': ['clone'],
               pinia: ['defineStore', 'createPinia'],
             },
           ],
@@ -40,6 +43,14 @@ export default defineConfig(async () => {
             /\.vue$/,
             /\.vue\?vue/, // .vue
             /\.md$/, // .md
+          ],
+        }),
+        createIndex({
+          rules: [
+            {
+              glob: '**/*.ts',
+              target: ['models', 'helper', 'store'],
+            },
           ],
         }),
       ],

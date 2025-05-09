@@ -8,6 +8,7 @@ export {}
 declare global {
   const AppEvent: (typeof import('#/helper'))['AppEvent']
   const EffectScope: (typeof import('vue'))['EffectScope']
+  const FileImage: (typeof import('#/models'))['FileImage']
   const Loading: (typeof import('element-plus'))['ElLoading']
   const Message: (typeof import('element-plus'))['ElMessage']
   const Notice: (typeof import('element-plus'))['ElNotification']
@@ -18,6 +19,7 @@ declare global {
   const actorItem2: (typeof import('#/api/sdk'))['actorItem2']
   const bus: (typeof import('wujie-vue3'))['bus']
   const catchError: (typeof import('#/exception'))['catchError']
+  const clone: (typeof import('es-toolkit'))['clone']
   const computed: (typeof import('vue'))['computed']
   const createApp: (typeof import('vue'))['createApp']
   const createPinia: (typeof import('pinia'))['createPinia']
@@ -28,6 +30,7 @@ declare global {
   const defineAsyncComponent: (typeof import('vue'))['defineAsyncComponent']
   const defineComponent: (typeof import('vue'))['defineComponent']
   const defineStore: (typeof import('pinia'))['defineStore']
+  const diff: (typeof import('#/helper'))['diff']
   const directusItem: (typeof import('#/api'))['directusItem']
   const effectScope: (typeof import('vue'))['effectScope']
   const emitter: (typeof import('#/helper'))['emitter']

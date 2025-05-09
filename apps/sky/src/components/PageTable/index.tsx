@@ -1,6 +1,5 @@
 import { useVbenForm } from '#/adapter/form'
 import { useDrawer } from '#/components/uses/drawer'
-import { diff } from '#/helper'
 
 import { defineGrid, renderAction } from './helper'
 import { RenderAction, TableProps } from './type'
@@ -117,7 +116,10 @@ export const Table = defineComponent<TableProps>({
       if (isEdit.value === false) {
         isFormChanged.value = Object.keys(removeNull(values)).length > 0
       } else {
-        const changes = diff(editRow.value, values)
+        let row = store.decodeImg(values)
+        row = store.fixUploadComponentsDataStructure(row)
+        const changes = diff(editRow.value, row)
+        // debug.log('changes:106', editRow.value, changes)
         isFormChanged.value = Object.keys(changes).length > 0
       }
     }
@@ -128,7 +130,9 @@ export const Table = defineComponent<TableProps>({
     async function onFormSubmit(values: Item) {
       try {
         drawerApi.loading()
+        // 修正限制单条上传图片的组件数据结构，不使用数组 [file] => file
         values = store.fixUploadComponentsDataStructure(values)
+        values = store.decodeImg(values)
         if (isEdit.value) {
           const id = editRow.value?.id
           const changes = merge({ id }, diff(editRow.value, values))

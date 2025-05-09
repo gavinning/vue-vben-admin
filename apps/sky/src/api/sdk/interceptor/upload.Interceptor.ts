@@ -1,12 +1,14 @@
 import type { Context, Middleware } from 'tap'
-import { upload, uploads } from '#/api/sdk'
+
+import { upload } from '#/api/sdk'
 
 const isSourceFile = (obj: any) => {
   return typeof obj === 'object' && !!obj.raw
 }
 
 const isSourceFiles = (obj: any) => {
-  return Array.isArray(obj) && obj.length > 0 && obj.every(isSourceFile)
+  // eslint-disable-next-line unicorn/no-array-callback-reference
+  return Array.isArray(obj) && obj.some(isSourceFile)
 }
 
 export const uploadInterceptor = (config: Set<string>): Middleware<Context> => {
@@ -14,24 +16,29 @@ export const uploadInterceptor = (config: Set<string>): Middleware<Context> => {
     try {
       const keys = config.values()
       for (const key of keys) {
-        const obj = ctx.data[key]
+        const obj = ctx[key]
 
         if (obj) {
+          // 单张图片上传
           if (isSourceFile(obj)) {
-            // console.log(1233, key, obj)
-            ctx.data[key] = (await upload(obj.raw)).id
+            const ret = await upload(obj.raw)
+            ctx[key] = ret.id
           }
+          // 多张图片上传
           if (isSourceFiles(obj)) {
-            // console.log(4566, key, obj)
-            const files = obj.map((item: any) => item.raw)
-            ctx.data[key] = (await uploads(files)).map((item) => item.id)
+            for (let i = 0; i < obj.length; i++) {
+              if (isSourceFile(obj[i])) {
+                const ret = await upload(obj[i].raw)
+                obj[i] = ret.id
+              }
+            }
+            ctx[key] = obj
           }
         }
       }
-
       return ctx
-    } catch (err) {
-      debug.error('图片上传失败:', err)
+    } catch (error) {
+      debug.error('图片上传失败:', error)
       Notice.error('图片上传失败，请重试')
     }
   }

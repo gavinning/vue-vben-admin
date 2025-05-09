@@ -22,7 +22,6 @@
     "semi": false
   },
   "dependencies": {
-    "tap": "workspace:*",
     "@4a/helper": "workspace:*",
     "@directus/sdk": "catalog:",
     "@element-plus/icons-vue": "catalog:",
@@ -49,6 +48,7 @@
     "mitt": "^3.0.1",
     "pinia": "catalog:",
     "sky": "workspace:*",
+    "tap": "workspace:*",
     "vue": "catalog:",
     "vue-router": "catalog:",
     "wujie-vue3": "^1.0.28",
@@ -61,6 +61,7 @@
     "stylus": "catalog:",
     "unplugin-auto-import": "catalog:",
     "unplugin-element-plus": "catalog:",
+    "vite-plugin-index": "workspace:*",
     "vxe-table": "catalog:"
   }
 }

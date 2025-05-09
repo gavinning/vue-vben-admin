@@ -14,12 +14,6 @@ export const getHost = () => {
   return useAppConfig(import.meta.env, import.meta.env.PROD).apiURL
 }
 
-export const uploadURL = () => {
-  return [getHost(), '/files?access_token=', useAccessStore().accessToken].join(
-    '',
-  )
-}
-
 // 图表服务地址
 export const getChartsHost = (path: string = '') => {
   const env = localStorage.getItem('DEBUG_HOST')
@@ -42,12 +36,4 @@ export const getChartsHost = (path: string = '') => {
 function pkgChartsHost(url: string) {
   const access = useAccessStore()
   return `${url}?access_token=${access.accessToken}`
-}
-
-export function encodeImg(uuid: string) {
-  return [getHost(), '/assets/', uuid].join('')
-}
-
-export function decodeImg(url: string) {
-  return new URL(url).pathname.replace('/assets/', '')
 }

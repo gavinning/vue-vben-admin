@@ -1,0 +1,27 @@
+{
+  "name": "vite-plugin-index",
+  "main": "dist/index.js",
+  "version": "0.1.1",
+  "types": "src/index.ts",
+  "type": "module",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "keywords": ["vite", "vite-plugin", "vite-plugin-index"],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/extend": "^3.0.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "glob": "^11.0.2",
+    "extend": "^3.0.2"
+  }
+}
