@@ -49,16 +49,17 @@ export const usePageTableStore = defineStore('PageTableStore', {
 
   actions: {
     // 修正限制单条上传图片的组件数据结构，不使用数组 [file] => file
-    fixUploadComponentsDataStructure(values: Item) {
+    fixUploadComponentsDataStructure(row: Item) {
+      row = clone(row)
       this.currentUploadSchemas.forEach((item) => {
         if (
-          item.fieldName in values && // 单条数据
+          item.fieldName in row && // 单条数据
           (!item.componentProps?.multiple || item.componentProps?.limit === 1)
         ) {
-          values[item.fieldName] = values[item.fieldName][0]
+          row[item.fieldName] = row[item.fieldName][0]
         }
       })
-      return values
+      return row
     },
 
     // 表单渲染之前对图片进行编码
@@ -71,8 +72,8 @@ export const usePageTableStore = defineStore('PageTableStore', {
           if (isLikeUUID(value)) {
             row[key] = [FileImage.init(value)]
           } else if (Array.isArray(value)) {
-            row[key] = value.map((value) => {
-              return isLikeUUID(value) ? FileImage.init(value) : value
+            row[key] = value.map((file) => {
+              return isLikeUUID(file) ? FileImage.init(file) : file
             })
           }
         }
@@ -90,8 +91,8 @@ export const usePageTableStore = defineStore('PageTableStore', {
           if (FileImage.isInstance(value)) {
             row[key] = value.id
           } else if (Array.isArray(value)) {
-            row[key] = value.map((value) => {
-              return FileImage.isInstance(value) ? value.id : value
+            row[key] = value.map((file) => {
+              return FileImage.isInstance(file) ? file.id : file
             })
           }
         }
