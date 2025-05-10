@@ -1,4 +1,5 @@
 import { PageTable } from '#/components/PageTable/PageTable'
+import { usePageTableStore } from '#/components/PageTable/store'
 import { renderApp } from '#/tsx/link'
 
 export default defineComponent({

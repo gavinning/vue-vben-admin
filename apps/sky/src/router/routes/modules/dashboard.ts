@@ -40,6 +40,24 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'Topic',
+        path: '/topics',
+        component: () => import('#/views/dashboard/topic'),
+        meta: {
+          icon: 'ion:apps',
+          title: '专题',
+        },
+      },
+      {
+        name: 'Cate',
+        path: '/cates',
+        component: () => import('#/views/dashboard/cate'),
+        meta: {
+          icon: 'nrk:category',
+          title: '分类',
+        },
+      },
+      {
         name: 'Charts',
         path: '/charts',
         component: () => import('#/views/dashboard/charts'),

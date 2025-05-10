@@ -1,3 +1,5 @@
+import { App } from '#/config'
+
 export {}
 
 // extend
@@ -14,6 +16,10 @@ declare global {
   export type ClassConstructor<T> = {
     new (...args: any[]): T
   }
+}
+
+declare global {
+  export { App } from '#/config'
 }
 
 declare global {

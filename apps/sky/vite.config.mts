@@ -21,10 +21,10 @@ export default defineConfig(async () => {
             {
               '#/api': ['directusItem', 'defaultParams'],
               '#/api/sdk': ['actor', 'actorItem', 'actorItem2'],
-              '#/config': [],
+              '#/config': ['App'],
               '#/exception': ['catchError'],
               '#/helper': ['ok', 'diff', 'filterFromArray', 'debug', 'emitter', 'AppEvent'],
-              '#/store': ['useAppStore', 'usePayStore', 'useLinkStore', 'usePageTableStore'],
+              '#/store': ['useAppStore', 'usePayStore', 'useLinkStore'],
               '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy', 'removeNull', 'removeEmpty'],
               '@vben/stores': ['useAccessStore', 'useUserStore'],
               'element-plus': [
@@ -49,7 +49,7 @@ export default defineConfig(async () => {
           rules: [
             {
               glob: '**/*.ts',
-              target: ['models', 'helper', 'store'],
+              target: ['models', 'helper', 'store', 'config'],
             },
           ],
         }),

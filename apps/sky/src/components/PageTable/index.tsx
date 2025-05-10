@@ -3,6 +3,7 @@ import { useDrawer } from '#/components/uses/drawer'
 
 import { defineGrid, renderAction } from './helper'
 import { RenderAction, TableProps } from './type'
+import { usePageTableStore } from './store'
 
 export { formatCUD, getEasyAction } from './helper'
 export * from './type'
@@ -55,7 +56,7 @@ export const Table = defineComponent<TableProps>({
       // 当新增表单提交的时候，会调用action.create方法
       proxyRenderAction.create = async () => {
         isEdit.value = false
-        await store.beforeCreate()
+        await store.beforeFormRenderCreate()
         handleReset()
         drawerApi.open()
       }
@@ -69,7 +70,7 @@ export const Table = defineComponent<TableProps>({
         // 不允许对copyRow进行修改，非响应式数据，修改无意义
         // 表单提交的时候会用到diff对比数据，所以不能开放对row的修改
         // 如果开放对row的修改，可能会影响到实际的数据修改
-        await store.beforeEdit(Object.freeze(copyRow))
+        await store.beforeFormRenderEdit(Object.freeze(copyRow))
         handleReset()
         drawerApi.open()
       }
@@ -102,7 +103,7 @@ export const Table = defineComponent<TableProps>({
       await formApi.resetForm()
       // 如果存在编辑行，则重置编辑行
       if (isEdit.value) {
-        const row = store.encodeImg(editRow.value)
+        const row = await store.beforeFormEdit(editRow.value)
         await formApi.setValues(row)
       }
       isFormChanged.value = false
@@ -112,13 +113,12 @@ export const Table = defineComponent<TableProps>({
     // 当值改的时候，isFormChanged.value = true
     // 当值重置的时候，isFormChanged.value = false
     // isFormChanged的值会控制当Drawer关闭的时候，是否需要确认
-    function handleValuesChange(values: Item) {
+    async function handleValuesChange(values: Item) {
       if (isEdit.value === false) {
         isFormChanged.value = Object.keys(removeEmpty(values)).length > 0
         // debug.log('changes:105', removeEmpty(values))
       } else {
-        let row = store.decodeImg(values)
-        row = store.fixUploadComponentsDataStructure(row)
+        const row = await store.beforeFormSubmit(true, values)
         const changes = diff(editRow.value, row)
         // debug.log('changes:106', changes)
         isFormChanged.value = Object.keys(changes).length > 0
@@ -131,9 +131,7 @@ export const Table = defineComponent<TableProps>({
     async function onFormSubmit(values: Item) {
       try {
         drawerApi.loading()
-        // 修正限制单条上传图片的组件数据结构，不使用数组 [file] => file
-        values = store.fixUploadComponentsDataStructure(values)
-        values = store.decodeImg(values)
+        values = await store.beforeFormSubmit(isEdit.value, values)
         if (isEdit.value) {
           const id = editRow.value?.id
           const changes = merge({ id }, diff(editRow.value, values))

@@ -6,6 +6,8 @@ import {
   Schema,
 } from '#/components/PageTable'
 import { isLikeUUID } from '#/helper'
+import { beforeFormEdit } from './interceptor/beforeFormEdit'
+import { beforeFormSubmit } from './interceptor/beforeFormSubmit'
 
 // 处理表的增删改查 For PageTable
 // 详见 #/components/PageTable/PageTable.tsx
@@ -49,56 +51,56 @@ export const usePageTableStore = defineStore('PageTableStore', {
 
   actions: {
     // 修正限制单条上传图片的组件数据结构，不使用数组 [file] => file
-    fixUploadComponentsDataStructure(row: Item) {
-      row = clone(row)
-      this.currentUploadSchemas.forEach((item) => {
-        if (
-          item.fieldName in row && // 单条数据
-          (!item.componentProps?.multiple || item.componentProps?.limit === 1)
-        ) {
-          row[item.fieldName] = row[item.fieldName][0]
-        }
-      })
-      return row
-    },
+    // fixUploadComponentsDataStructure(row: Item) {
+    //   row = clone(row)
+    //   this.currentUploadSchemas.forEach((item) => {
+    //     if (
+    //       item.fieldName in row && // 单条数据
+    //       (!item.componentProps?.multiple || item.componentProps?.limit === 1)
+    //     ) {
+    //       row[item.fieldName] = row[item.fieldName][0]
+    //     }
+    //   })
+    //   return row
+    // },
 
     // 表单渲染之前对图片进行编码
-    encodeImg(row: Item) {
-      row = clone(row)
-      this.currentUploadSchemas.forEach((item) => {
-        if (item.fieldName in row) {
-          const key = item.fieldName
-          const value = row[key]
-          if (isLikeUUID(value)) {
-            row[key] = [FileImage.init(value)]
-          } else if (Array.isArray(value)) {
-            row[key] = value.map((file) => {
-              return isLikeUUID(file) ? FileImage.init(file) : file
-            })
-          }
-        }
-      })
-      return row
-    },
+    // encodeImg(row: Item) {
+    //   row = clone(row)
+    //   this.currentUploadSchemas.forEach((item) => {
+    //     if (item.fieldName in row) {
+    //       const key = item.fieldName
+    //       const value = row[key]
+    //       if (isLikeUUID(value)) {
+    //         row[key] = [FileImage.init(value)]
+    //       } else if (Array.isArray(value)) {
+    //         row[key] = value.map((file) => {
+    //           return isLikeUUID(file) ? FileImage.init(file) : file
+    //         })
+    //       }
+    //     }
+    //   })
+    //   return row
+    // },
 
     // 对图片字段进行解码
-    decodeImg(row: Item) {
-      row = clone(row)
-      this.currentUploadSchemas.forEach((item) => {
-        if (item.fieldName in row) {
-          const key = item.fieldName
-          const value = row[key]
-          if (FileImage.isInstance(value)) {
-            row[key] = value.id
-          } else if (Array.isArray(value)) {
-            row[key] = value.map((file) => {
-              return FileImage.isInstance(file) ? file.id : file
-            })
-          }
-        }
-      })
-      return row
-    },
+    // decodeImg(row: Item) {
+    //   row = clone(row)
+    //   this.currentUploadSchemas.forEach((item) => {
+    //     if (item.fieldName in row) {
+    //       const key = item.fieldName
+    //       const value = row[key]
+    //       if (FileImage.isInstance(value)) {
+    //         row[key] = value.id
+    //       } else if (Array.isArray(value)) {
+    //         row[key] = value.map((file) => {
+    //           return FileImage.isInstance(file) ? file.id : file
+    //         })
+    //       }
+    //     }
+    //   })
+    //   return row
+    // },
 
     /**
      * 用于动态修改表单
@@ -124,7 +126,7 @@ export const usePageTableStore = defineStore('PageTableStore', {
      * 一般与editComponentProps的key相同
      * 只是value不同，方便为创建和编辑设置不同的默认值
      */
-    async beforeCreate() {
+    async beforeFormRenderCreate() {
       // 表单通用渲染前钩子
       if (this.currentHook.hook) {
         this.schema[this.name] = await this.currentHook.hook(this.currentSchema)
@@ -147,7 +149,7 @@ export const usePageTableStore = defineStore('PageTableStore', {
      * 更新类型表单渲染前执行
      * update操作的Form表单在渲染前调用
      */
-    async beforeEdit(row: Item) {
+    async beforeFormRenderEdit(row: Item) {
       // 表单通用渲染前钩子
       if (this.currentHook.hook) {
         this.schema[this.name] = await this.currentHook.hook(
@@ -216,5 +218,30 @@ export const usePageTableStore = defineStore('PageTableStore', {
       this.schema[this.name] = form
       this.column[this.name] = columns
     },
+
+    // 生命周期钩子：beforeFormEdit
+    // 在编辑表单之前，对数据进行预处理
+    async beforeFormEdit(row: Item) {
+      row = clone(row)
+      const ctx = await beforeFormEdit({
+        data: row,
+        name: this.name as App.Table,
+        uploadSchemas: this.currentUploadSchemas,
+      })
+      return ctx.data
+    },
+
+    // 生命周期钩子：beforeFormSubmit
+    // 在提交表单之前，对数据进行预处理
+    async beforeFormSubmit(isEdit: boolean, row: Item) {
+      row = clone(row)
+      const ctx = await beforeFormSubmit({
+        data: row,
+        isEdit,
+        name: this.name as App.Table,
+        uploadSchemas: this.currentUploadSchemas,
+      })
+      return ctx.data
+    }
   },
 })

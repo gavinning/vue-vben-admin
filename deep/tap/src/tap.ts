@@ -18,7 +18,7 @@ export class Tap<T extends Context = Context> {
     this.ctx = ctx
   }
 
-  public static create<T extends Context>(ctx: T = {} as T) {
+  public static src<T extends Context>(ctx: T) {
     return new Tap(ctx)
   }
 

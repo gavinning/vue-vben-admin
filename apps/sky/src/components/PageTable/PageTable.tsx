@@ -1,4 +1,5 @@
 import { formatCUD, getEasyAction, Table } from '.'
+import { usePageTableStore } from './store'
 
 export interface PageTableProps {
   /**

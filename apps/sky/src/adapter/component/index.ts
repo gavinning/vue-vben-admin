@@ -21,6 +21,7 @@ import {
   ElDatePicker,
   ElDivider,
   ElInput,
+  ElInputTag,
   ElInputNumber,
   ElNotification,
   ElRadio,
@@ -54,6 +55,7 @@ export type ComponentType =
   | 'Divider'
   | 'IconPicker'
   | 'Input'
+  | 'InputTag'
   | 'InputNumber'
   | 'RadioGroup'
   | 'Select'
@@ -143,6 +145,7 @@ async function initComponentAdapter() {
       )
     },
     Input: withDefaultPlaceholder(ElInput, 'input'),
+    InputTag: withDefaultPlaceholder(ElInputTag, 'input'),
     InputNumber: withDefaultPlaceholder(ElInputNumber, 'input'),
     RadioGroup: (props, { attrs, slots }) => {
       let defaultSlot

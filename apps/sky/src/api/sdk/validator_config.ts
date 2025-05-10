@@ -3,6 +3,10 @@ import { z } from 'zod'
 const remove = z.object({ id: z.number().or(z.string()) })
 
 export const validator = {
+  all: {
+    remove,
+  },
+
   pays: {
     add: z.object({
       appId: z.string(),
@@ -30,5 +34,5 @@ export const validator = {
 export type ValidatorKey = keyof typeof validator
 
 export const getValidator = (path: ValidatorKey) => {
-  return validator[path]
+  return validator[path] ?? validator.all
 }
