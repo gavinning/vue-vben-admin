@@ -73,7 +73,7 @@ export function removeNull(target: any) {
 }
 
 export function isEmpty(obj: any) {
-  return [NaN, undefined, null, ''].includes(obj)
+  return ['', null, Number.NaN, undefined].includes(obj)
 }
 
 export function isFullEmpty(obj: any) {
