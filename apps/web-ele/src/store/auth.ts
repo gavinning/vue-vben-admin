@@ -14,7 +14,7 @@ import {
   getUserInfoApi,
   loginApi,
   logoutApi,
-} from 'sky/api';
+} from '#/api'
 
 import { $t } from '#/locales';
 

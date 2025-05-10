@@ -7,7 +7,7 @@ import { generateAccessible } from '@vben/access';
 import { preferences } from '@vben/preferences';
 
 import { ElMessage } from 'element-plus';
-import { getAllMenusApi } from 'sky/api';
+import { getAllMenusApi } from '#/api';
 
 import { BasicLayout, IFrameView } from '#/layouts';
 import { $t } from '#/locales';

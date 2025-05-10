@@ -4,7 +4,7 @@ import { h } from 'vue';
 import { Page, useVbenDrawer } from '@vben/common-ui';
 
 import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus';
-import { getAllMenusApi } from 'sky/api';
+import { getAllMenusApi } from '#/api';
 
 import { useVbenForm } from '#/adapter/form';
 

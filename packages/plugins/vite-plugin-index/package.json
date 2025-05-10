@@ -11,7 +11,7 @@
   "keywords": ["vite", "vite-plugin", "vite-plugin-index"],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build"
+    "build": "bun build src/index.ts --production --target=bun --drop=console --packages=external --outdir=dist"
   },
   "devDependencies": {
     "@types/bun": "latest",

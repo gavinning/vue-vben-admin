@@ -71,3 +71,28 @@ export function removeNull(target: any) {
   })
   return obj
 }
+
+export function isEmpty(obj: any) {
+  return [NaN, undefined, null, ''].includes(obj)
+}
+
+export function isFullEmpty(obj: any) {
+  if (isEmpty(obj)) return true
+  if (Array.isArray(obj) && obj.length === 0) return true
+  if (typeof obj === 'object' && Object.keys(obj).length === 0) return true
+  return false
+}
+
+// 删除所有空值
+// 包括：undefined、null、空字符串、空数组、空对象
+export function removeEmpty(target: any) {
+  if (!target) return target
+  const obj = merge(true, {}, target)
+  Object.keys(obj).forEach((key) => {
+    if (isFullEmpty(obj[key])) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete obj[key]
+    }
+  })
+  return obj
+}

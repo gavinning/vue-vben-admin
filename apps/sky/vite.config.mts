@@ -25,7 +25,7 @@ export default defineConfig(async () => {
               '#/exception': ['catchError'],
               '#/helper': ['ok', 'diff', 'filterFromArray', 'debug', 'emitter', 'AppEvent'],
               '#/store': ['useAppStore', 'usePayStore', 'useLinkStore', 'usePageTableStore'],
-              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy', 'removeNull'],
+              '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy', 'removeNull', 'removeEmpty'],
               '@vben/stores': ['useAccessStore', 'useUserStore'],
               'element-plus': [
                 ['ElMessage', 'Message'],

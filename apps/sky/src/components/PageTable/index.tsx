@@ -114,12 +114,13 @@ export const Table = defineComponent<TableProps>({
     // isFormChanged的值会控制当Drawer关闭的时候，是否需要确认
     function handleValuesChange(values: Item) {
       if (isEdit.value === false) {
-        isFormChanged.value = Object.keys(removeNull(values)).length > 0
+        isFormChanged.value = Object.keys(removeEmpty(values)).length > 0
+        // debug.log('changes:105', removeEmpty(values))
       } else {
         let row = store.decodeImg(values)
         row = store.fixUploadComponentsDataStructure(row)
         const changes = diff(editRow.value, row)
-        // debug.log('changes:106', editRow.value, changes)
+        // debug.log('changes:106', changes)
         isFormChanged.value = Object.keys(changes).length > 0
       }
     }
