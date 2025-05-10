@@ -1,5 +1,3 @@
-import { App } from '#/config'
-
 export {}
 
 // extend

@@ -1,4 +1,5 @@
 import { defineMiddleware } from 'tap'
+
 import { IFormContext } from '../type'
 
 // 表单提交前对图片字段进行解码

@@ -9,7 +9,7 @@ export const glob = (modules: Record<string, any>) => {
   const all: AnyFunction[] = []
   const ms = Object.values(modules)
   ms.forEach((m: any) => {
-    all.push(...Object.values(m) as AnyFunction[])
+    all.push(...(Object.values(m) as AnyFunction[]))
   })
-  return all.map(i => i())
+  return all.map((i) => i())
 }

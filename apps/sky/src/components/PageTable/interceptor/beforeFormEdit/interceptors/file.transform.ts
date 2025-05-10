@@ -1,6 +1,8 @@
 import { defineMiddleware } from 'tap'
-import { IFormContext } from '../type'
+
 import { isLikeUUID } from '#/helper'
+
+import { IFormContext } from '../type'
 
 // 表单渲染之前对图片进行编码
 export const FileTransformEncode = () => {

@@ -21,8 +21,8 @@ import {
   ElDatePicker,
   ElDivider,
   ElInput,
-  ElInputTag,
   ElInputNumber,
+  ElInputTag,
   ElNotification,
   ElRadio,
   ElRadioButton,
@@ -55,8 +55,8 @@ export type ComponentType =
   | 'Divider'
   | 'IconPicker'
   | 'Input'
-  | 'InputTag'
   | 'InputNumber'
+  | 'InputTag'
   | 'RadioGroup'
   | 'Select'
   | 'Space'

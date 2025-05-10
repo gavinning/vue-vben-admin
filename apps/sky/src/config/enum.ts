@@ -1,10 +1,10 @@
 export namespace App {
   export enum Table {
     apps = 'apps',
+    cates = 'cates',
     links = 'links',
-    trades = 'trades',
     pays = 'pays',
     topics = 'topics',
-    cates = 'cates',
+    trades = 'trades',
   }
 }

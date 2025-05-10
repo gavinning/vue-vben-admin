@@ -52,7 +52,7 @@
     "dev:naive": "pnpm -F @vben/web-naive run dev",
     "dev:play": "pnpm -F @vben/playground run dev",
     "format": "vsh lint --format --fix --allow-empty-input",
-    "lint": "vsh lint",
+    "lint": "sh .husky/_/pre-commit",
     "postinstall": "pnpm -r run stub --if-present",
     "preinstall": "npx only-allow pnpm",
     "preview": "turbo-run preview",

@@ -5,7 +5,7 @@ import {
   PageTableHooks,
   Schema,
 } from '#/components/PageTable'
-import { isLikeUUID } from '#/helper'
+
 import { beforeFormEdit } from './interceptor/beforeFormEdit'
 import { beforeFormSubmit } from './interceptor/beforeFormSubmit'
 
@@ -242,6 +242,6 @@ export const usePageTableStore = defineStore('PageTableStore', {
         uploadSchemas: this.currentUploadSchemas,
       })
       return ctx.data
-    }
+    },
   },
 })
