@@ -11,5 +11,5 @@ function transform(config: Set<string>) {
 }
 
 export function registerInterceptor(collection: string) {
-  return transform(useAppStore().getFileFieldMap(collection))
+  return transform(useUploadHub().getFileFieldMap(collection))
 }

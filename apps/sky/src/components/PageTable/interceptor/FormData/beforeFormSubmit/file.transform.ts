@@ -30,7 +30,9 @@ export const fixUploadComponentsDataStructure = () => {
         item.fieldName in ctx.data && // 单条数据
         (!item.componentProps?.multiple || item.componentProps?.limit === 1)
       ) {
-        ctx.data[item.fieldName] = ctx.data[item.fieldName][0]
+        const len = ctx.data[item.fieldName]?.length
+        ctx.data[item.fieldName] =
+          len && len > 0 ? ctx.data[item.fieldName][0] : null
       }
     })
     next()

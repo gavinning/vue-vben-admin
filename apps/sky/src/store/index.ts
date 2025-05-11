@@ -2,5 +2,7 @@
 
 export * from './app'
 export * from './auth'
+export * from './hub/hub.chart'
+export * from './hub/hub.upload'
 export * from './link'
 export * from './pay'

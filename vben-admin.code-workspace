@@ -153,10 +153,6 @@
       "path": "packages/locales",
     },
     {
-      "name": "vite-plugin-index",
-      "path": "packages/plugins/vite-plugin-index",
-    },
-    {
       "name": "@vben/preferences",
       "path": "packages/preferences",
     },

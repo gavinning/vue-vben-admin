@@ -61,7 +61,7 @@
     "stylus": "catalog:",
     "unplugin-auto-import": "catalog:",
     "unplugin-element-plus": "catalog:",
-    "vite-plugin-index": "workspace:*",
+    "vite-plugin-index": "^0.1.2",
     "vxe-table": "catalog:"
   }
 }

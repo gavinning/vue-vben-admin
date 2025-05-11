@@ -24,7 +24,13 @@ export default defineConfig(async () => {
               '#/config': ['App'],
               '#/exception': ['catchError'],
               '#/helper': ['ok', 'diff', 'filterFromArray', 'debug', 'emitter', 'AppEvent'],
-              '#/store': ['useAppStore', 'usePayStore', 'useLinkStore'],
+              '#/store': [
+                'useAppStore',
+                'usePayStore',
+                'useLinkStore',
+                'useChartsHub',
+                'useUploadHub',
+              ],
               '@4a/helper': ['merge', 'mergeDefaults', 'removeKey', 'deepCopy', 'removeNull', 'removeEmpty'],
               '@vben/stores': ['useAccessStore', 'useUserStore'],
               'element-plus': [
@@ -49,7 +55,12 @@ export default defineConfig(async () => {
           rules: [
             {
               glob: '**/*.ts',
-              target: ['models', 'helper', 'store', 'config'],
+              target: ['models', 'helper', 'config'],
+            },
+            {
+              indexFirstMode: true,
+              glob: '**/*.ts',
+              target: ['store'],
             },
           ],
         }),

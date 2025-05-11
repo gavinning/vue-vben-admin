@@ -17,10 +17,6 @@ declare global {
 }
 
 declare global {
-  export { App } from '#/config'
-}
-
-declare global {
   export namespace App {
     export namespace App {
       export interface Row {

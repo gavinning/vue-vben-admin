@@ -60,6 +60,10 @@ export interface Schema extends VbenFormSchema {
    * 表单组件创建时渲染配置
    */
   createComponentProps: ComponentProps
+  /**
+   * 需要预处理的标记
+   */
+  waitSelectOptions?: boolean
 }
 
 export interface FormSchema extends FormRenderProps {
@@ -100,25 +104,4 @@ export interface TableProps {
    * 参考：https://doc.vben.pro/components/common-ui/vben-form.html
    */
   formRenderSchema?: FormSchema
-}
-
-// PageTable Hooks
-export type PageTableHook<T extends Item = Item> = (
-  schema: FormSchema,
-  row?: Readonly<T>,
-) => Promise<FormSchema>
-
-export interface PageTableHooks {
-  /**
-   * 通用表单渲染钩子，在所有场景都会触发
-   */
-  hook?: PageTableHook
-  /**
-   * 新增表单渲染钩子
-   */
-  create?: PageTableHook
-  /**
-   * 编辑表单渲染钩子
-   */
-  update?: PageTableHook
 }

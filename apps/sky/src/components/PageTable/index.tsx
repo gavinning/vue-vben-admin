@@ -56,7 +56,6 @@ export const Table = defineComponent<TableProps>({
       // 当新增表单提交的时候，会调用action.create方法
       proxyRenderAction.create = async () => {
         isEdit.value = false
-        await store.beforeFormRenderCreate()
         handleReset()
         drawerApi.open()
       }
@@ -66,11 +65,6 @@ export const Table = defineComponent<TableProps>({
       proxyRenderAction.update = async (row: Item) => {
         isEdit.value = true
         editRow.value = row
-        const copyRow = merge(true, {}, row)
-        // 不允许对copyRow进行修改，非响应式数据，修改无意义
-        // 表单提交的时候会用到diff对比数据，所以不能开放对row的修改
-        // 如果开放对row的修改，可能会影响到实际的数据修改
-        await store.beforeFormRenderEdit(Object.freeze(copyRow))
         handleReset()
         drawerApi.open()
       }
@@ -101,6 +95,7 @@ export const Table = defineComponent<TableProps>({
 
     async function handleReset() {
       await formApi.resetForm()
+      await store.beforeFormRender(isEdit.value)
       // 如果存在编辑行，则重置编辑行
       if (isEdit.value) {
         const row = await store.beforeFormEdit(editRow.value)
