@@ -141,7 +141,7 @@ export const Table = defineComponent<TableProps>({
           await action.update?.(changes)
           merge(editRow.value, changes)
         } else {
-          await action.create?.(values)
+          await action.create?.(removeEmpty(values))
           gridApi.query()
         }
 
