@@ -72,5 +72,15 @@ declare global {
         date_updated?: string
       }
     }
+
+    export namespace Topic {
+      export interface Row {
+        id: ID
+        title: string
+        desc?: string
+        top: ID[]
+        cates: ID[]
+      }
+    }
   }
 }

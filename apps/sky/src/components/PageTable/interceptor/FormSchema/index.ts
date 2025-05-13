@@ -6,7 +6,12 @@ import { autoTap } from 'tap'
 
 import { IFormSchemaContext } from './type'
 
+// 表单赋值之前预处理FormSchema
+export function beforeReset(ctx: IFormSchemaContext) {
+  return autoTap(ctx, import.meta.glob('./interceptors/*.ts', { eager: true }))
+}
+
 // 表单渲染前预处理FormSchema
 export function beforeFormRender(ctx: IFormSchemaContext) {
-  return autoTap(ctx, import.meta.glob('./interceptors/*.ts', { eager: true }))
+  return autoTap(ctx, import.meta.glob('./before/*.ts', { eager: true }))
 }

@@ -18,6 +18,11 @@ export const Table = defineComponent<TableProps>({
     // Form
     'formProps',
     'formRenderSchema',
+    // control
+    'beforeCtrl',
+    'afterCtrl',
+    // action column
+    'actionColumn',
   ],
   setup(props, { slots }) {
     const store = usePageTableStore()
@@ -25,6 +30,9 @@ export const Table = defineComponent<TableProps>({
     const [Grid, gridApi] = defineGrid(props)
     const [Form, formApi] = useVbenForm(props.formRenderSchema ?? {})
     const { Drawer, drawerApi } = useDrawer()
+
+    // FormSchema渲染后处理
+    store.afterFormRender(formApi)
 
     // 处理实际的crud操作
     const action = props.action
@@ -95,7 +103,7 @@ export const Table = defineComponent<TableProps>({
 
     async function handleReset() {
       await formApi.resetForm()
-      await store.beforeFormRender(isEdit.value)
+      await store.beforeReset(isEdit.value)
       // 如果存在编辑行，则重置编辑行
       if (isEdit.value) {
         const row = await store.beforeFormEdit(editRow.value)
@@ -149,7 +157,7 @@ export const Table = defineComponent<TableProps>({
 
     return () => (
       <div class="app-mod-page_table">
-        <Grid>{{ ...slots, ...renderAction(proxyRenderAction) }}</Grid>
+        <Grid>{{ ...slots, ...renderAction(props, proxyRenderAction) }}</Grid>
         <Drawer
           closeConfirm={isFormChanged.value}
           onConfirm={onDrawerConfirm}

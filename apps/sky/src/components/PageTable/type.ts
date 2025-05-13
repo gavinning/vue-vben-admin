@@ -1,3 +1,4 @@
+import { JSX } from 'vue/jsx-runtime'
 import { VxeGridPropTypes } from 'vxe-table'
 
 import {
@@ -70,6 +71,12 @@ export interface FormSchema extends FormRenderProps {
   schema?: Schema[]
 }
 
+export interface ActionColumn {
+  width?: number
+  title?: string
+  [key: string]: any
+}
+
 export interface TableProps {
   /**
    * 表格列配置
@@ -80,6 +87,11 @@ export interface TableProps {
    * 表格操作事件
    */
   action: TableAction
+
+  /**
+   * action列配置
+   */
+  actionColumn?: ActionColumn
 
   /**
    * 表格配置
@@ -104,4 +116,15 @@ export interface TableProps {
    * 参考：https://doc.vben.pro/components/common-ui/vben-form.html
    */
   formRenderSchema?: FormSchema
+
+  /**
+   * 表单渲染配置，服务器传递的schema对应此类型
+   * 参考：https://doc.vben.pro/components/common-ui/vben-form.html
+   */
+  beforeCtrl?: (row: any) => JSX.Element
+
+  /**
+   * 是否等待selectOptions
+   */
+  afterCtrl?: (row: any) => JSX.Element
 }

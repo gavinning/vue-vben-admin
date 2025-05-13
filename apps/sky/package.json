@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@4a/helper": "workspace:*",
+    "@4a/tap": "^0.1.3",
     "@directus/sdk": "catalog:",
     "@element-plus/icons-vue": "catalog:",
     "@vben/access": "workspace:*",

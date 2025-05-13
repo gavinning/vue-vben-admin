@@ -19,8 +19,13 @@ const defaultActionColumn = {
   width: 120,
 }
 
-const defaultAction = (row: App.Pay.Row, action: TableProps['action']) => (
+const defaultAction = (
+  props: TableProps,
+  row: Item,
+  action: TableProps['action'],
+) => (
   <div class="table-action">
+    {props.beforeCtrl?.(row)}
     <ElButton
       link
       onClick={() => action.update?.(row)}
@@ -39,11 +44,12 @@ const defaultAction = (row: App.Pay.Row, action: TableProps['action']) => (
     >
       删除
     </ElButton>
+    {props.afterCtrl?.(row)}
   </div>
 )
 
-export const renderAction = (action: RenderAction) => ({
-  action: ({ row }: Record<'row', App.Pay.Row>) => defaultAction(row, action),
+export const renderAction = (props: TableProps, action: RenderAction) => ({
+  action: ({ row }: Record<'row', Item>) => defaultAction(props, row, action),
   'toolbar-tools': () => (
     <ElButton
       class="mr-2"
@@ -61,7 +67,10 @@ export const defineGrid = (props: TableProps) => {
   // 决定是否显示操作列
   const columns =
     action.update || action.remove
-      ? [...props.columns, defaultActionColumn]
+      ? [
+          ...props.columns,
+          merge({}, defaultActionColumn, props.actionColumn ?? {}),
+        ]
       : props.columns
 
   // 构建VbenVxeGrid的默认配置

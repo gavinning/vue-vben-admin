@@ -4,7 +4,7 @@ import { IFormSchemaContext } from '../type'
 
 // 表单渲染前FormSchema预处理
 export const FormSchemaProCoding = () => {
-  return defineMiddleware<IFormSchemaContext>(async (ctx, next) => {
+  return defineMiddleware<IFormSchemaContext>((ctx, next) => {
     ctx.data.schema = ctx.data.schema ?? []
 
     ctx.data.schema = ctx.data.schema.map((item) => {

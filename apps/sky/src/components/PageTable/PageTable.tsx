@@ -1,4 +1,4 @@
-import { formatCUD, getEasyAction, Table } from '.'
+import { formatCUD, getEasyAction, Table, TableProps } from '.'
 import { usePageTableStore } from './store'
 
 export interface PageTableProps {
@@ -6,6 +6,9 @@ export interface PageTableProps {
    * 表名
    */
   name: string
+  beforeCtrl?: TableProps['beforeCtrl']
+  afterCtrl?: TableProps['afterCtrl']
+  actionColumn?: TableProps['actionColumn']
 }
 
 // PageTable极简模式
@@ -21,6 +24,7 @@ export const PageTable = defineComponent<PageTableProps>({
     // 注意配置验证器
     // CRUD操作的属性验证在这里配置
     // apps/sky/src/api/sdk/validator_config.ts
+    // 后续需要将验证器配置抽离到外部
     const action = computed(() =>
       getEasyAction(props.name, formatCUD(store.currentCUD)),
     )
@@ -30,6 +34,7 @@ export const PageTable = defineComponent<PageTableProps>({
         action={action.value}
         columns={store.currentColumns}
         formRenderSchema={store.currentSchema}
+        {...props}
       >
         {slots}
       </Table>

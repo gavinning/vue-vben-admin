@@ -24,6 +24,12 @@
     padding 6px 0
     color var(--el-text-color-secondary)
 
+  // 文件上传限制1张
+  // 上传1张后，会隐藏上传按钮
+  .form-file-limit-1
+    .el-upload-list__item + .el-upload
+      visibility: hidden
+
 /* 小屏幕单列 */
 @media (max-width: 600px)
   .form-container

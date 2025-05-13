@@ -2,9 +2,11 @@ import { filter } from '#/api'
 import { FormSchema } from '#/components/PageTable'
 
 import {
+  afterFormRender,
   beforeFormEdit,
   beforeFormRender,
   beforeFormSubmit,
+  beforeReset,
 } from './interceptor'
 
 // 处理表的增删改查 For PageTable
@@ -46,12 +48,12 @@ export const usePageTableStore = defineStore('PageTableStore', {
       this.name = name
       return this.currentSchema.schema?.length
         ? this.currentSchema
-        : this.getFormSchemaRequest()
+        : this._getFormSchemaRequest()
     },
 
     // 外部应该调用getFormSchema方法
     // 从服务器获取创建和编辑的表单Schema
-    async getFormSchemaRequest() {
+    async _getFormSchemaRequest() {
       const data = await this.api.getOne(
         filter({ key: this.name, name: 'FormSchema' }),
       )
@@ -63,13 +65,25 @@ export const usePageTableStore = defineStore('PageTableStore', {
       this.cud[this.name] = cud
       this.schema[this.name] = form
       this.column[this.name] = columns
+
+      await this.beforeFormRender()
     },
 
     // 生命周期钩子：beforeFormEdit
     // 在FormSchema渲染之前，对FormSchema进行预处理
     // 调用时机：Form.reset之后，Form.setValues之前
-    async beforeFormRender(isEdit?: boolean) {
+    async beforeFormRender() {
       const ctx = await beforeFormRender({
+        name: this.name as App.Table,
+        data: this.currentSchema,
+      })
+      this.schema[this.name] = ctx.data
+    },
+
+    // 生命周期钩子：beforeReset
+    // 在FormSchema渲染之后会有一次reset，reset之前调用该钩子
+    async beforeReset(isEdit?: boolean) {
+      const ctx = await beforeReset({
         name: this.name as App.Table,
         data: this.currentSchema,
         isEdit,
@@ -103,6 +117,16 @@ export const usePageTableStore = defineStore('PageTableStore', {
         uploadSchemas: this.currentUploadSchemas,
       })
       return ctx.data
+    },
+
+    // 生命周期钩子：afterFormRender
+    // 在表单渲染之后，对表单追加Hooks
+    afterFormRender(api: any) {
+      afterFormRender({
+        api,
+        name: this.name as App.Table,
+        data: this.currentSchema,
+      })
     },
   },
 })
