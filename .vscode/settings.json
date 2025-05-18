@@ -156,6 +156,9 @@
   // extension
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": false,
+  "emmet.includeLanguages": {
+    "typescriptreact": "html" // 对 TSX 文件强制应用 class将使用``class``而不是``className``
+  },
 
   "errorLens.enabledDiagnosticLevels": ["warning", "error"],
   "errorLens.excludeBySource": ["cSpell", "Grammarly", "eslint"],
