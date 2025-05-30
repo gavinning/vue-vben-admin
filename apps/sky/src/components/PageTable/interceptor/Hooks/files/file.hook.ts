@@ -18,7 +18,7 @@ function limitMaxSize(ctx: Context, schema: Schema) {
   const maxWidth = schema.componentProps?.maxWidth
   const maxHeight = schema.componentProps?.maxHeight
 
-  if (!isFile || !maxSize || !maxWidth || !maxHeight) return
+  if (!isFile) return
 
   // 清理不符合条件的文件
   const resetFormValue = async (file: UploadFile) => {
