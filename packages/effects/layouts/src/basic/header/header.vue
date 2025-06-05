@@ -12,6 +12,7 @@ import {
   GlobalSearch,
   LanguageToggle,
   PreferencesButton,
+  Professional,
   ThemeToggle,
 } from '../../widgets';
 
@@ -45,6 +46,14 @@ const rightSlots = computed(() => {
     list.push({
       index: REFERENCE_VALUE,
       name: 'global-search',
+    });
+  }
+
+  // 添加自定义专业版入口
+  if (preferences.widget.professional) {
+    list.push({
+      index: REFERENCE_VALUE + 5,
+      name: 'professional',
     });
   }
 
@@ -143,6 +152,11 @@ function clearPreferencesAndLogout() {
   <div class="flex h-full min-w-0 flex-shrink-0 items-center">
     <template v-for="slot in rightSlots" :key="slot.name">
       <slot :name="slot.name">
+        <!-- 自定义专业版入口 -->
+        <template v-if="slot.name === 'professional'">
+          <Professional />
+        </template>
+
         <template v-if="slot.name === 'global-search'">
           <GlobalSearch
             :enable-shortcut-key="globalSearchShortcutKey"

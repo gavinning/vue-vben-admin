@@ -15,3 +15,5 @@ export const MdiQqchat = createIconifyIcon('mdi:qqchat');
 export const PreviewEye = createIconifyIcon('entypo:eye');
 
 export const SaveIcon = createIconifyIcon('entypo:save');
+
+export const ProfessionalIcon = createIconifyIcon('mdi:professional-hexagon');

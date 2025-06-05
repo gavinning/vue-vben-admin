@@ -21,7 +21,7 @@ export const overridesPreferences = defineOverridesPreferences({
     companyName: '连城数据',
     enable: true,
     companySiteLink: `https://${location.hostname}`,
-    date: '2025',
+    date: new Date().getFullYear().toString(),
     settingShow: true,
   },
   widget: {
@@ -30,5 +30,7 @@ export const overridesPreferences = defineOverridesPreferences({
     languageToggle: false,
     lockScreen: false,
     notification: false,
+    // 自定义专业版入口
+    professional: '/professional',
   },
 })

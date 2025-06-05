@@ -235,6 +235,8 @@ interface WidgetPreferences {
   lockScreen: boolean;
   /** 是否显示通知部件 */
   notification: boolean;
+  /** 是否显示Professional图标，值为path */
+  professional: string;
   /** 显示刷新按钮 */
   refresh: boolean;
   /** 是否显示侧边栏显示/隐藏部件 */
