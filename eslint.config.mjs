@@ -8,5 +8,14 @@ export default defineConfig([
     rules: {
       "vue/multi-word-component-names": "off", // 全局关闭规则[2,5](@ref)
     },
-  }
+  },
+  {
+    files: ['**/*.d.ts'],
+    name: 'disables/dts',
+    rules: {
+      'unicorn/no-abusive-eslint-disable': 'warn',
+      'eslint-comments/no-unlimited-disable': 'warn',
+      '@typescript-eslint/triple-slash-reference': 'off',
+    },
+  },
 ])

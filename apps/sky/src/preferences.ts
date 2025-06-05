@@ -25,6 +25,7 @@ export const overridesPreferences = defineOverridesPreferences({
     settingShow: true,
   },
   widget: {
+    refresh: false,
     globalSearch: false,
     languageToggle: false,
     lockScreen: false,
