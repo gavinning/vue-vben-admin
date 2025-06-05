@@ -66,6 +66,15 @@ const routes: RouteRecordRaw[] = [
           title: '趋势',
         },
       },
+      {
+        name: 'Professional',
+        path: '/professional',
+        component: () => import('#/views/dashboard/professional'),
+        meta: {
+          icon: 'mdi:professional-hexagon',
+          title: '专业版',
+        },
+      },
     ],
   },
 ]
