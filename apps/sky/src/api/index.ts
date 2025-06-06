@@ -1,3 +1,5 @@
 export * from './core'
 export * from './directus'
+export * from './http'
+export * from './mock'
 export * from './sdk'

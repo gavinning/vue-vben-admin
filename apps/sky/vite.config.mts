@@ -19,7 +19,7 @@ export default defineConfig(async () => {
             'vue',
             'vue-router',
             {
-              '#/api': ['directusItem', 'defaultParams'],
+              '#/api': ['directusItem', 'defaultParams', 'http'],
               '#/api/sdk': ['actor', 'actorItem', 'actorItem2'],
               '#/config': ['App'],
               '#/exception': ['catchError'],

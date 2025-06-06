@@ -39,6 +39,7 @@ declare global {
   const getCurrentInstance: (typeof import('vue'))['getCurrentInstance']
   const getCurrentScope: (typeof import('vue'))['getCurrentScope']
   const h: (typeof import('vue'))['h']
+  const http: (typeof import('#/api'))['http']
   const inject: (typeof import('vue'))['inject']
   const isProxy: (typeof import('vue'))['isProxy']
   const isReactive: (typeof import('vue'))['isReactive']
