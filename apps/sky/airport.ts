@@ -25,7 +25,7 @@ const deployTask = new Task({
       name: '发布到远程服务器',
       skip: false,
       async run() {
-        const ssh = remote('root@g2.wsd80.top')
+        const ssh = remote('root@g2.xinhaolaile.top')
         const dir = (path?: string) => join('/data/app/sky', name, path ?? '')
         try {
           await ssh.run('rm -f', dir('latest'))
