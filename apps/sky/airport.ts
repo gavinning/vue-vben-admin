@@ -26,7 +26,7 @@ const deployTask = new Task({
       skip: false,
       async run() {
         const ssh = remote('root@g2.xinhaolaile.top')
-        const dir = (path?: string) => join('/data/app/sky', name, path ?? '')
+        const dir = (path?: string) => join('/data/app/skii', name, path ?? '')
         try {
           await ssh.run('rm -f', dir('latest'))
           await ssh.run('mkdir -p', dir(version))
