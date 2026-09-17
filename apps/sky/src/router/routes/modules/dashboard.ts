@@ -19,6 +19,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'carbon:wallet',
           title: '支付',
+          authority: ['Proxy1', 'Proxy2'],
         },
       },
       {
@@ -28,6 +29,16 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'carbon:list',
           title: '订单',
+        },
+      },
+      {
+        name: 'Product',
+        path: '/products',
+        component: () => import('#/views/dashboard/product'),
+        meta: {
+          icon: 'carbon:app',
+          title: '分成',
+          authority: ['Proxy1', 'Proxy2'],
         },
       },
       {
@@ -73,43 +84,11 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'mdi:professional-hexagon',
           title: '专业版',
+          authority: ['Proxy1', 'Proxy2'],
         },
       },
     ],
   },
 ]
-
-if (import.meta.env.DEV) {
-  const demoPage = {
-    name: 'DemoPage',
-    path: '/demoPage',
-    component: () => import('#/views/dashboard/demo/demo.vue'),
-    meta: {
-      icon: 'carbon:demo',
-      title: '测试页面',
-    },
-  }
-
-  const analytics = {
-    name: 'Analytics',
-    path: '/analytics',
-    component: () => import('#/views/dashboard/analytics/index.vue'),
-    meta: {
-      icon: 'lucide:area-chart',
-      title: $t('page.dashboard.analytics'),
-    },
-  }
-  const workspace = {
-    name: 'Workspace',
-    path: '/workspace',
-    component: () => import('#/views/dashboard/workspace/index.vue'),
-    meta: {
-      icon: 'carbon:workspace',
-      title: $t('page.dashboard.workspace'),
-    },
-  }
-
-  routes[0]?.children?.push(demoPage, analytics, workspace)
-}
 
 export default routes

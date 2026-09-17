@@ -1,11 +1,13 @@
 import type { RouteRecordRaw } from 'vue-router'
 
+import { $t } from '#/locales'
+
 const routes: RouteRecordRaw[] = [
   {
     meta: {
       icon: 'vscode-icons:file-type-fitbit',
       order: -1,
-      title: '项目',
+      title: 'DEV',
     },
     name: 'Projects',
     path: '/projects',
@@ -28,6 +30,35 @@ const routes: RouteRecordRaw[] = [
           title: 'Edit',
           hideInTab: true,
           hideInMenu: true,
+        },
+      },
+
+      // ---
+      {
+        name: 'DemoPage',
+        path: '/demoPage',
+        component: () => import('#/views/projects/demo/demo.vue'),
+        meta: {
+          icon: 'carbon:demo',
+          title: '测试页面',
+        },
+      },
+      {
+        name: 'Analytics',
+        path: '/analytics',
+        component: () => import('#/views/projects/analytics/index.vue'),
+        meta: {
+          icon: 'lucide:area-chart',
+          title: $t('page.dashboard.analytics'),
+        },
+      },
+      {
+        name: 'Workspace',
+        path: '/workspace',
+        component: () => import('#/views/projects/workspace/index.vue'),
+        meta: {
+          icon: 'carbon:workspace',
+          title: $t('page.dashboard.workspace'),
         },
       },
     ],

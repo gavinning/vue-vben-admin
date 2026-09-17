@@ -5,6 +5,7 @@ import { renderApp } from '#/tsx/link'
 export default defineComponent({
   setup() {
     const store = useLinkStore()
+    // 获取应用列表
     store.getApps()
     return () => <PageTable name="links">{renderApp(store.appMap)}</PageTable>
   },

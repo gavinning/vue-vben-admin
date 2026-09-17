@@ -99,6 +99,7 @@ export const useAuthStore = defineStore('auth', () => {
     let userInfo: null | UserInfo = null
     userInfo = await getUserInfoApi()
     userStore.setUserInfo(userInfo)
+    // console.log(1891, userInfo)
     return userInfo
   }
 
