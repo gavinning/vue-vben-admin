@@ -25,12 +25,12 @@ const deployTask = new Task({
       name: '发布到远程服务器',
       skip: false,
       async run() {
-        const ssh = remote('root@g2.xinhaolaile.top')
+        const ssh = remote('-p 10089 root@g2.xinhaolaile.top')
         const dir = (path?: string) => join('/data/app/skii', name, path ?? '')
         try {
           await ssh.run('rm -f', dir('latest'))
           await ssh.run('mkdir -p', dir(version))
-          await ssh.scp(`.cache/${file}`, dir())
+          await ssh.scp(`-P 10089 .cache/${file}`, dir())
           await ssh.run('tar -zxvf', dir(file), '-C', dir(version))
           await ssh.run('ln -s', dir(version), dir('latest'))
           await ssh.run('rm -f', dir(file))
